@@ -1,13 +1,23 @@
-Package: OrximTechPOS
-Title: OrximTech Inventory System
+Package: OrximTechPMS
+Title: OrximTech Management System
 Version: 0.0.0.9000
 Authors@R: person('Anthony', 'Oppong-Gyebi', email = 'aaytee20008@gmail.com', role = c('cre', 'aut'))
-Description: Pharmacy Point of Sale, Inventory and Analytics System by OrximTech
+Description: Pharmacy Point of Sale, Inventory and Analytics System by OrximTech Inc.
 License: MIT + file LICENSE
 Imports: 
     config,
+    dplyr,
     golem,
-    shiny
+    httr,
+    processx,
+    shiny,
+    shinydashboard,
+    thinkr
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
+Suggests: 
+    spelling,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Language: en-US

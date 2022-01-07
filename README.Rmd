@@ -13,16 +13,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-# OrximTechPOS
+# OrximTechPMS
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of OrximTechPOS is to ...
+The goal of OrximTechPMS is to ...
 
 ## Installation
 
-You can install the development version of OrximTechPOS like so:
+You can install the development version of OrximTechPMS like so:
 
 ``` r
 # FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
@@ -33,7 +33,7 @@ You can install the development version of OrximTechPOS like so:
 This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
-library(OrximTechPOS)
+library(OrximTechPMS)
 ## basic example code
 ```
 
