@@ -5,9 +5,13 @@ Authors@R: person('Anthony', 'Oppong-Gyebi', email = 'aaytee20008@gmail.com', ro
 Description: Pharmacy Point of Sale, Inventory and Analytics System by OrximTech Inc.
 License: MIT + file LICENSE
 Imports: 
+    attempt,
     config,
     dplyr,
+    DT,
+    glue,
     golem,
+    htmltools,
     httr,
     processx,
     shiny,
@@ -21,3 +25,5 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Language: en-US
+URL: https://github.com/Aaytee32/OrximTechPMS
+BugReports: https://github.com/Aaytee32/OrximTechPMS/issues
