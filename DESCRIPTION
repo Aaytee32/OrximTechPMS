@@ -1,0 +1,13 @@
+Package: OrximTechPOS
+Title: OrximTech Inventory System
+Version: 0.0.0.9000
+Authors@R: person('Anthony', 'Oppong-Gyebi', email = 'aaytee20008@gmail.com', role = c('cre', 'aut'))
+Description: Pharmacy Point of Sale, Inventory and Analytics System by OrximTech
+License: MIT + file LICENSE
+Imports: 
+    config,
+    golem,
+    shiny
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
