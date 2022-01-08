@@ -19,9 +19,9 @@
 ## to change the name in the app_sys() function in app_config.R /!\
 ## 
 golem::fill_desc(
-  pkg_name = "OrximTechPOS", # The Name of the package containing the App 
+  pkg_name = "OrximTechPMS", # The Name of the package containing the App 
   pkg_title = "OrximTech Management System", # The Title of the package containing the App 
-  pkg_description = "Pharmacy Point of Sale, Inventory and Analytics System by OrximTech", # The Description of the package containing the App 
+  pkg_description = "Pharmacy Point of Sale, Inventory and Analytics System by OrximTech Inc.", # The Description of the package containing the App 
   author_first_name = "Anthony", # Your First Name
   author_last_name = "Oppong-Gyebi", # Your Last Name
   author_email = "aaytee20008@gmail.com", # Your Email

@@ -3,6 +3,8 @@
 #' @param request Internal parameter for `{shiny}`. 
 #'     DO NOT REMOVE.
 #' @import shiny
+#' @import shinydashboard
+#' @import shinyjs
 #' @noRd
 app_ui <- function(request) {
   tagList(
@@ -10,7 +12,24 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic 
     fluidPage(
-      h1("OrximTechPOS")
+      #h1("OrximTechPMS"),
+      useShinyjs(),
+      includeCSS("inst/app/www/custom.css"),
+        
+        tags$header("Pharmacy Management System"),
+        div(id = "page_links",
+            actionButton(inputId = "pos_page", label = "Point of Sale"),
+            actionButton(inputId = "salesdash_page", label = "Sales Dashboard"),
+            actionButton(inputId = "inventory_page", label = "Inventory"),
+            actionButton(inputId = "analytics_page", label = "Analytics"),
+            actionButton(inputId = "help_page", label = "Help"),
+            actionButton(inputId = "logout_page", label = "Logout")),
+        
+        div(id = "main_content_div", 
+            uiOutput("main_content")
+        ),
+        
+        tags$footer("Powered by OrximTech Microservices Inc.")
     )
   )
 }
@@ -33,7 +52,7 @@ golem_add_external_resources <- function(){
     favicon(),
     bundle_resources(
       path = app_sys('app/www'),
-      app_title = 'OrximTechPOS'
+      app_title = 'OrximTechPMS'
     )
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert() 

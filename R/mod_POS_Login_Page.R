@@ -9,9 +9,25 @@
 #' @importFrom shiny NS tagList 
 mod_POS_Login_Page_ui <- function(id){
   ns <- NS(id)
-  tagList(
- 
-  )
+  #tagList(
+        
+    div(id = "login_div",
+      
+    div("Login", id = "login_title_div"),
+    
+    div(id = "login",
+        div(textInput(inputId = "username", 
+                      label = NULL, 
+                      placeholder = "Username"), 
+            id = "username_div"),
+        div(textInput(inputId = "password",
+                      label = NULL,
+                      placeholder = "Password"),
+            id = "password_div"),
+        div(actionButton("employee", "Employee"), 
+            actionButton("admin", "Administrator"), 
+            id = "employee_admin_div")))
+    #)
 }
     
 #' POS_Login_Page Server Functions

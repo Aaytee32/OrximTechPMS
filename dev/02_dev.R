@@ -16,11 +16,22 @@
 ## Dependencies ----
 ## Add one line by package you want to add as dependency
 usethis::use_package( "thinkr" )
+usethis::use_package("shiny")
+usethis::use_package("shinydashboard")
+usethis::use_package("dplyr")
+usethis::use_package("httr")
+usethis::use_package("shinyjs")
 
 ## Add modules ----
 ## Create a module infrastructure in R/
-golem::add_module( name = "name_of_module1" ) # Name of the module
-golem::add_module( name = "name_of_module2" ) # Name of the module
+golem::add_module( name = "POS_Login_Page" ) # Name of the module
+golem::add_module( name = "POS_HomePage" ) # Name of the module
+golem::add_module( name = "POS_Point_of_Sale" ) # Name of the module
+golem::add_module( name = "POS_Sales_Dashboard" ) # Name of the module
+golem::add_module( name = "POS_Inventory" ) # Name of the module
+golem::add_module( name = "POS_Analytics" ) # Name of the module
+golem::add_module( name = "POS_Help" ) # Name of the module
+golem::add_module( name = "POS_Logout" ) # Name of the module
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
@@ -44,7 +55,7 @@ usethis::use_test( "app" )
 # Documentation
 
 ## Vignette ----
-usethis::use_vignette("OrximTechPOS")
+usethis::use_vignette("OrximTechPMS")
 devtools::build_vignettes()
 
 ## Code Coverage----

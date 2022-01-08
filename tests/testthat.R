@@ -1,4 +1,4 @@
 library(testthat)
-library(OrximTechPOS)
+library(OrximTechPMS)
 
-test_check("OrximTechPOS")
+test_check("OrximTechPMS")
