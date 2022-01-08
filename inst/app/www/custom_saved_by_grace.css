@@ -1,0 +1,174 @@
+header {
+  /*background: red;*/
+  font-size: 48px;
+  font-family: Arial;
+  font-weight: bold;
+  color: #013220;
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 1%;
+  height: 10%; /*13% total heighht with margins*/
+}
+
+#page_links {
+  /*background: blue;*/
+  font-size: 20px;
+  font-family: Arial;  
+  margin-left: 30%;
+  margin-right: 30%;
+  height: 1%;
+  margin-bottom: 2%; /*3% total height with margins*/
+  display: flex;
+  justify-content: space-between;
+}
+
+#pos_page {
+  font-family: Arial;
+  font-size: 16px;
+  color: #5a5a5a;
+  padding: auto;
+  margin-bottom: auto;
+	background: white;
+	border: none;
+	outline: none;
+}
+
+#salesdash_page {
+  font-family: Arial;
+  font-size: 16px;
+  color: #5a5a5a;
+	padding: auto;
+  margin-bottom: auto;
+	background: white;
+	border: none;
+	outline: none;
+}
+
+#inventory_page {
+  font-family: Arial;
+  font-size: 16px;
+  color: #5a5a5a;
+	padding: auto;
+  margin-bottom: auto;
+	background: white;
+	border: none;
+	outline: none;
+}
+
+#analytics_page {
+  font-family: Arial;
+  font-size: 16px;
+  color: #5a5a5a;
+	padding: auto;
+  margin-bottom: auto;
+	background: white;
+	border: none;
+	outline: none;
+}
+
+#help_page {
+  font-family: Arial;
+  font-size: 16px;
+  color: #5a5a5a;
+	padding: auto;
+  margin-bottom: auto;
+	background: white;
+	border: none;
+	outline: none;
+} 
+
+#logout_page {
+  font-family: Arial;
+  font-size: 16px;
+  color: #5a5a5a;
+  padding: auto;
+  margin-bottom: auto;
+	background: white;
+	border: none;
+	outline: none;
+}
+
+#main_content_div {
+  /*background: green;*/
+  width: 100%
+  margin-top: 1%;
+  margin-bottom: 1%;
+  height: 76%;
+  min-height: 550px; /*79% total height with margins*/
+}
+
+footer {
+  /*background: #666666;*/
+  width: 70%;
+  margin-right: 15%;
+  margin-left: 15%;
+  color: #888888;
+  border-top: 1px solid #666666;
+  background: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 2%;
+  height: 4%; /*8% total height with margins*/
+}
+
+#login {
+  background: #F5F5F5;
+  width: 30%;
+  height: 100%;
+  margin-top: 2%;
+  margin-left: 35%;
+  margin-right: 35%;
+  padding-top: 1%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 2%;
+}
+
+#login_title_div {
+  background: #424242;
+  margin-bottom: 0.5%;
+  text-align: center;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 20px;
+  color: #F5F5F5;
+  width: 30%;
+  margin-left: 35%;
+  margin-right: 35%;
+}
+
+#employee_admin_div {
+  width: 70%%;
+  margin-left: 15%;
+  margin-right: 15%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#employee {
+  background: #424242;
+  color: #F5F5F5;
+  height: 50px;
+  font-family: Arial;
+  font-weight: bold;
+  margin-left: 0;
+}
+
+#admin {
+  background: #424242;
+  color: #F5F5F5;
+  height: 50px;
+  font-family: Arial;
+  font-weight: bold;
+  margin-right: 0;
+}
+
+#username_div {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+#password_div {
+  margin-left: 20%;
+  margin-right: 20%;
+}
