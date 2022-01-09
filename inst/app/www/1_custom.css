@@ -121,7 +121,8 @@ footer {
 }
 
 #login {
-  background: #F5F5F5;
+  background: blue;
+  /*background: #F5F5F5;*/
   width: 30%;
   min-height: 300px;
   margin-left: 35%;
@@ -140,6 +141,8 @@ footer {
   width: 100%;
   min-height: 40px;
   vertical-align: middle;
+  margin-left: 0%;
+  margin-right: 0%;
 }
 
 #employee_admin_div {
