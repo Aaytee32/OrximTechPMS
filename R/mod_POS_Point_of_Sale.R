@@ -11,7 +11,38 @@ mod_POS_Point_of_Sale_ui <- function(id){
   ns <- NS(id)
   #tagList(
     div(id = "pos_div",
-        paste("This will have a point of sale feature"))
+        
+        div(id = "pos_entry_info_div",
+            textInput(inputId = "customer_name",
+                      label = NULL,
+                      placeholder = "Customer Name"),
+            
+            selectInput(inputId = "product_name",
+                        label = "Select Product",
+                        choices = NULL),
+            
+            numericInput(inputId = "product_qty",
+                         label = "Quantity",
+                         value = NULL),
+            
+            actionButton(inputId = "add_product",
+                     label = "Add"),
+            
+            selectInput(inputId = "del_product_name",
+                        label = "Select Product to Delete",
+                        choices = NULL),
+        
+            actionButton(inputId = "delete_product",
+                         label = "Delete")
+            ),
+        
+        div(id = "pos_table_div",
+            paste("This will have a point of sale feature")),
+        div(id = "pos_total_div",
+            paste("This will have a point of sale feature"))
+        
+        
+        )
   #)
 }
     

@@ -25,7 +25,7 @@ app_ui <- function(request) {
             actionButton(inputId = "help_page", label = "Help"),
             actionButton(inputId = "logout_page", label = "Logout")),
         
-        div(id = "main_content_div", 
+        div(id = "main_content_div",
             uiOutput("main_content")
         ),
         

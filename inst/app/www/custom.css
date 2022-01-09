@@ -172,3 +172,98 @@ footer {
   margin-left: 20%;
   margin-right: 20%;
 }
+
+#pos_div {
+  /*justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;*/
+  height: 100%;
+  min-height: 500px;
+  display: flex;
+}
+
+#pos_entry_info_div {
+  width: 32%;
+  height: 100%;
+  margin-left: 2%;
+  margin-right: 2%;
+  border: 1px solid #666666;
+}
+
+.form-group.shiny-input-container {
+  width: 100%;
+  height: 100%;
+  /*background: green;*/
+}
+
+#customer_name {
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  background: blue;
+  min-height: 60px;
+  text-align: center;
+}
+
+#product_name {
+  font-size: 30px;
+  width: 70%;
+  height: 100%;
+  min-height: 60px;
+}
+
+#product_qty {
+  background: blue;
+  font-size: 30px;
+  width: 100%;
+  height: 100%;
+  display: block;
+  font-weight: bold;
+  min-height: 80px;
+}
+
+#add_product {
+  background: #092208;
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  min-height: 80px;
+  border: solid 3px #666666;
+  color: #F5F5F5;
+}
+
+#del_product_name {
+  background: green;
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  min-height: 60px;
+}
+
+#delete_product {
+  background: #800000;
+  width: 100%;
+  height: 100%;
+  font-size: 30px;
+  font-weight: bold;
+  min-height: 80px;
+  border: solid 3px #666666;
+  color: #F5F5F5;
+}
+
+#pos_table_div {
+  width: 32%;
+  height: 100%;
+  margin-left: 2%;
+  margin-right: 2%;
+  border: 1px solid #666666;
+}
+
+#pos_total_div {
+  width: 24%;
+  height: 100%;
+  margin-left: 2%;
+  margin-right: 2%;
+  border: 1px solid #666666;
+}
