@@ -12,10 +12,11 @@ mod_POS_Login_Page_ui <- function(id){
   #tagList(
         
     div(id = "login_div",
-      
-    div("Login", id = "login_title_div"),
     
     div(id = "login",
+        
+        div("Login", id = "login_title_div"),
+        
         div(textInput(inputId = "username", 
                       label = NULL, 
                       placeholder = "Username"), 

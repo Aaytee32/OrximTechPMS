@@ -17,30 +17,45 @@ mod_POS_Point_of_Sale_ui <- function(id){
                       label = NULL,
                       placeholder = "Customer Name"),
             
-            selectInput(inputId = "product_name",
-                        label = "Select Product",
-                        choices = NULL),
+            column(width = 12,
+                   column(width = 6,
+                          selectInput(inputId = "product_name",
+                                      label = "Select Product",
+                                      choices = NULL)),
+                   column(width = 6,
+                          numericInput(inputId = "product_qty",
+                                       label = "Quantity",
+                                       value = NULL))),
             
-            numericInput(inputId = "product_qty",
-                         label = "Quantity",
-                         value = NULL),
-            
-            actionButton(inputId = "add_product",
+                        actionButton(inputId = "add_product",
+
                      label = "Add"),
             
-            selectInput(inputId = "del_product_name",
-                        label = "Select Product to Delete",
-                        choices = NULL),
+            div(id = "del_product_name_div",
+                         selectInput(inputId = "del_product_name",
+                          label = "Select Product to Delete",
+                          choices = NULL)),
         
             actionButton(inputId = "delete_product",
                          label = "Delete")
             ),
         
         div(id = "pos_table_div",
-            paste("This will have a point of sale feature")),
-        div(id = "pos_total_div",
-            paste("This will have a point of sale feature"))
+                div(id = "pos_table_title_div",
+                    paste("Transaction")
+                ),
+                div(id = "pos_table",
+                    tableOutput("pos_table_output"))),
         
+        div(id = "pos_total_div",
+            div(id = "pos_total_title_div",
+                paste("Transaction Summary")
+                ),
+            div(id = "pos_total_amt",
+                verbatimTextOutput("pos_table_total")),
+            div(id = "pos_approve_div",
+                actionButton("pos_approve", 
+                             "Approve")))
         
         )
   #)

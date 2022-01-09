@@ -111,56 +111,62 @@ footer {
   height: 4%; /*8% total height with margins*/
 }
 
+#login_div {
+  /*justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;*/
+  height: 100%;
+  width: 100%;
+  min-height: 500px;
+}
+
 #login {
   background: #F5F5F5;
   width: 30%;
-  height: 100%;
-  margin-top: 2%;
+  min-height: 300px;
   margin-left: 35%;
   margin-right: 35%;
-  padding-top: 1%;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-bottom: 2%;
 }
 
 #login_title_div {
   background: #424242;
-  margin-bottom: 0.5%;
+  margin-bottom: 10%;
   text-align: center;
   font-family: Arial;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 30px;
   color: #F5F5F5;
-  width: 30%;
-  margin-left: 35%;
-  margin-right: 35%;
+  width: 100%;
+  min-height: 40px;
+  vertical-align: middle;
 }
 
 #employee_admin_div {
   width: 70%%;
+  height: 100%;
   margin-left: 15%;
   margin-right: 15%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; 
+  align-items: center;
 }
 
 #employee {
   background: #424242;
   color: #F5F5F5;
-  height: 50px;
+  height: 100%;
   font-family: Arial;
   font-weight: bold;
-  margin-left: 0;
+  min-height: 40px;
 }
 
 #admin {
   background: #424242;
   color: #F5F5F5;
-  height: 50px;
+  height: 100%;
   font-family: Arial;
   font-weight: bold;
-  margin-right: 0;
+  min-height: 40px;
 }
 
 #username_div {
@@ -171,6 +177,7 @@ footer {
 #password_div {
   margin-left: 20%;
   margin-right: 20%;
+  margin-bottom: 5%;
 }
 
 #pos_div {
@@ -183,87 +190,166 @@ footer {
 }
 
 #pos_entry_info_div {
-  width: 32%;
+  background: #F5F5F5;
+  width: 20%;
   height: 100%;
-  margin-left: 2%;
-  margin-right: 2%;
-  border: 1px solid #666666;
+  margin-left: 3%;
+  margin-right: 3%;
+  border: 5px solid #666666;
+  border-radius: 15px;
 }
 
 .form-group.shiny-input-container {
   width: 100%;
   height: 100%;
+  text-align: center;
   /*background: green;*/
 }
 
-#customer_name {
-  width: 100%;
-  height: 100%;
+.selectize-input {
+  height: 100%; 
+  width: 100%; 
   font-size: 20px;
-  background: blue;
   min-height: 60px;
-  text-align: center;
+  border: solid 1px #666666;
+  margin-bottom: 5%;
 }
 
-#product_name {
-  font-size: 30px;
-  width: 70%;
+#customer_name {
+  width: 90%;
   height: 100%;
+  font-size: 20px;
+  /*background: blue;*/
   min-height: 60px;
+  text-align: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  margin-right: 5%;
+  margin-left: 5%;
+  border: solid 1px #666666;
 }
 
 #product_qty {
-  background: blue;
+  /*background: blue;*/
   font-size: 30px;
   width: 100%;
   height: 100%;
   display: block;
   font-weight: bold;
-  min-height: 80px;
+  min-height: 60px;
+  text-align: center;
+  border: solid 1px #666666;
+  margin-bottom: 10%;
 }
 
 #add_product {
   background: #092208;
-  width: 100%;
+  width: 80%;
   height: 100%;
   font-size: 30px;
   font-weight: bold;
-  min-height: 80px;
+  min-height: 60px;
   border: solid 3px #666666;
+  margin-right: 10%;
+  margin-left: 10%;
+  border-radius: 5px;
   color: #F5F5F5;
+  margin-bottom: 10%;
 }
 
-#del_product_name {
-  background: green;
-  width: 100%;
-  height: 100%;
-  font-size: 30px;
-  min-height: 60px;
+#del_product_name_div {
+  margin-right: 10%;
+  margin-left: 10%;
 }
 
 #delete_product {
   background: #800000;
-  width: 100%;
+  width: 80%;
   height: 100%;
   font-size: 30px;
   font-weight: bold;
-  min-height: 80px;
+  min-height: 60px;
   border: solid 3px #666666;
+  margin-right: 10%;
+  margin-left: 10%;
+  border-radius: 5px;
   color: #F5F5F5;
+  margin-bottom: 10%;
 }
 
 #pos_table_div {
-  width: 32%;
+  width: 42%;
   height: 100%;
-  margin-left: 2%;
-  margin-right: 2%;
-  border: 1px solid #666666;
+  margin-left: 3%;
+  margin-right: 3%;
+  border: 5px solid #666666;
+  border-radius: 15px;
 }
 
 #pos_total_div {
-  width: 24%;
+  width: 20%;
+  background: #F5F5F5;
   height: 100%;
-  margin-left: 2%;
-  margin-right: 2%;
-  border: 1px solid #666666;
+  min-height: 200px;
+  margin-left: 3%;
+  margin-right: 3%;
+  border: 5px solid #666666;
+  border-radius: 15px;
+}
+
+#pos_total_title_div {
+  margin-bottom: 10%;
+  margin-top: 10%;
+  text-align: center;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 20px;
+  color: #424242;
+  width: 100%;
+}
+
+
+#pos_total_amt {
+  width: 80%;
+  height: 100%;
+}
+
+#pos_approve_div {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#pos_approve {
+  background: #092208;
+  width: 80%;
+  height: 100%;
+  font-size: 180%;
+  font-weight: bold;
+  min-height: 60px;
+  border: solid 3px #666666;
+  margin-right: 10%;
+  margin-left: 10%;
+  border-radius: 5px;
+  color: #F5F5F5;
+  margin-bottom: 10%;
+  /*text-align: center;
+  vertical-align: middle;*/
+}
+
+#pos_table_title_div {
+  background: #424242;
+  margin-bottom: 10%;
+  text-align: center;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 30px;
+  color: #F5F5F5;
+  width: 100%;
+  min-height: 40px;
+  vertical-align: middle;
 }
