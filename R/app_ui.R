@@ -14,7 +14,7 @@ app_ui <- function(request) {
     fluidPage(
       #h1("OrximTechPMS"),
       useShinyjs(),
-      includeCSS("inst/app/www/custom.css"),
+      includeCSS("inst/app/www/1_custom.css"),
         
         tags$header("Pharmacy Management System"),
         div(id = "page_links",
