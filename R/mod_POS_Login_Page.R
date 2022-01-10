@@ -12,22 +12,22 @@ mod_POS_Login_Page_ui <- function(id){
   #tagList(
         
     div(id = "login_div",
-    
-    div(id = "login",
         
-        div("Login", id = "login_title_div"),
-        
-        div(textInput(inputId = "username", 
-                      label = NULL, 
-                      placeholder = "Username"), 
-            id = "username_div"),
-        div(textInput(inputId = "password",
-                      label = NULL,
-                      placeholder = "Password"),
-            id = "password_div"),
-        div(actionButton("employee", "Employee"), 
-            actionButton("admin", "Administrator"), 
-            id = "employee_admin_div")))
+        div(id = "login",
+            
+            div("Login", id = "login_title_div"),
+            
+            div(textInput(inputId = "username", 
+                          label = NULL, 
+                          placeholder = "Username"), 
+                id = "username_div"),
+            div(textInput(inputId = "password",
+                          label = NULL,
+                          placeholder = "Password"),
+                id = "password_div"),
+            div(actionButton("employee", "Employee"), 
+                actionButton("admin", "Administrator"), 
+                id = "employee_admin_div")))
     #)
 }
     
