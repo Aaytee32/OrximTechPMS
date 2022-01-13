@@ -10,8 +10,32 @@
 mod_POS_Analytics_ui <- function(id){
   ns <- NS(id)
   #tagList(
-    div(id = "pos_div",
-        paste("This will have a point of analytics feature"))
+    div(id = "analytics_div",
+        
+        div(id = "analytics_inputs_div",
+            
+            div(id = "analytics_inputs_title_div",
+                paste("Features")),
+            
+            div(id = "analytics_selectInput_div",
+                selectInput(inputId = "analytics_selectInput",
+                            label = "Choose Feature",
+                            choices = NULL)),
+            
+            div(id = "analytics_sliderInput_div",
+                sliderInput(inputId = "analytics_sliderInput",
+                            label = "Summary",
+                            min = 0,
+                            max = 1500,
+                            value = 100)),
+            
+            div(id = "analytics_dateRangeInput_div",
+                dateRangeInput(inputId = "analytics_dateRangeInput",
+                               label = "Select Range",
+                               start = "2020-01-01",
+                               end = "2022-01-01"))
+        ),
+        div(id = "analytics_display_div"))
   #)
 }
     
