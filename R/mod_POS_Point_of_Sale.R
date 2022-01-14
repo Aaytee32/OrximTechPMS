@@ -37,7 +37,7 @@ mod_POS_Point_of_Sale_ui <- function(id){
                           choices = NULL)),
         
             actionButton(inputId = "delete_product",
-                         label = "Delete")
+                         label = "Drop")
             ),
         
         div(id = "pos_table_div",
@@ -55,7 +55,13 @@ mod_POS_Point_of_Sale_ui <- function(id){
                 verbatimTextOutput("pos_table_total")),
             div(id = "pos_approve_div",
                 actionButton("pos_approve", 
-                             "Approve")))
+                             "Approve")),
+            div(id = "pos_clear_div",
+                actionButton("pos_clear", 
+                             "Clear")),
+            div(id = "pos_new_transaction_div",
+                actionButton("pos_new_transaction", 
+                             "New Transaction")))
         
         )
   #)

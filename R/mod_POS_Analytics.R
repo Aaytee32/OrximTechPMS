@@ -20,6 +20,15 @@ mod_POS_Analytics_ui <- function(id){
             div(id = "analytics_selectInput_div",
                 selectInput(inputId = "analytics_selectInput",
                             label = "Choose Feature",
+                            choices = c("Select",
+                                        "Periodic Performance",
+                                        "Employee Statistics",
+                                        "Forecasting"
+                                        ))),
+            
+            div(id = "analytics_selectInput_sub_div",
+                selectInput(inputId = "analytics_selectInput_sub",
+                            label = "Choose Filter",
                             choices = NULL)),
             
             div(id = "analytics_sliderInput_div",
@@ -45,6 +54,7 @@ mod_POS_Analytics_ui <- function(id){
 mod_POS_Analytics_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
+    
  
   })
 }

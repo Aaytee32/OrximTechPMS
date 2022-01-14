@@ -5,6 +5,7 @@
 #' @import shiny
 #' @import shinydashboard
 #' @import shinyjs
+#' @import plotly
 #' @noRd
 app_ui <- function(request) {
   tagList(

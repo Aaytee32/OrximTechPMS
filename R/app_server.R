@@ -4,6 +4,7 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @import shinyjs
+#' @import plotly
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic
