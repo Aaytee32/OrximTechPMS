@@ -10,9 +10,21 @@ app_server <- function( input, output, session ) {
   # Your application server logic
   
   ####################LOGIN/HOMEPAGE###################
+  output$page_links <- renderUI({
+    fluidRow(width =12,
+    actionButton(inputId = "pos_page", label = "Point of Sale"),
+    actionButton(inputId = "salesdash_page", label = "Sales Dashboard"),
+    actionButton(inputId = "inventory_page", label = "Inventory"),
+    actionButton(inputId = "analytics_page", label = "Analytics"),
+    actionButton(inputId = "help_page", label = "Help"),
+    actionButton(inputId = "logout_page", label = "Logout"))
+  })
+  
   output$main_content <- renderUI({
     mod_POS_Login_Page_ui("POS_Login_Page_ui_1")
   })
+  
+  #######################LINKS######################
   
   observeEvent(input$pos_page,{
     output$main_content <- renderUI({
@@ -47,6 +59,17 @@ app_server <- function( input, output, session ) {
   observeEvent(input$logout_page,{
     output$main_content <- renderUI({
       mod_POS_Login_Page_ui("POS_Login_Page_ui_1")
+    })
+    
+    output$page_links <- renderUI({
+      fluidRow(
+    actionButton(inputId = "pos_page", label = "Point of Sale", disabled = TRUE),
+    actionButton(inputId = "salesdash_page", label = "Sales Dashboard", disabled = TRUE),
+    actionButton(inputId = "inventory_page", label = "Inventory", disabled = TRUE),
+    actionButton(inputId = "analytics_page", label = "Analytics", disabled = TRUE),
+    actionButton(inputId = "help_page", label = "Help", disabled = TRUE),
+    actionButton(inputId = "logout_page", label = "Logout")
+      )
     })
   })
   

@@ -24,6 +24,11 @@ usethis::use_package("shinyjs")
 usethis::use_package("plotly")
 usethis::use_package("readr")
 usethis::use_package("readxl")
+usethis::use_package("zoo")
+usethis::use_package("lubridate")
+usethis::use_package("reshape2")
+usethis::use_package("knitr")
+usethis::use_package("stringr")
 
 ## Add modules ----
 ## Create a module infrastructure in R/

@@ -11,12 +11,12 @@ header {
   height: 10%; /*13% total heighht with margins*/
 }
 
-#page_links {
+#page_links_div {
   /*background: blue;*/
   font-size: 20px;
   font-family: Arial;  
-  margin-left: 30%;
-  margin-right: 30%;
+  margin-left: 10%;
+  margin-right: 10%;
   height: 1%;
   margin-bottom: 2%; /*3% total height with margins*/
   display: flex;
@@ -126,7 +126,7 @@ footer {
   width: 100%; 
   font-size: 20px;
   min-height: 60px;
-  border: solid 1px #666666;
+  border: solid 1px #000000;
   margin-bottom: 5%;
   vertical-align: middle;
 }
@@ -151,7 +151,7 @@ margin-top: 5%;
 }
 
 #login_title_div {
-background: #424242;
+background: #000000;
   margin-bottom: 10%;
 text-align: center;
 font-family: Arial;
@@ -220,8 +220,20 @@ margin-right: 0%;
   height: 100%;
   margin-left: 3%;
   margin-right: 3%;
-  border: 5px solid #666666;
+  border: 5px solid #000000;
   border-radius: 15px;
+}
+
+#pos_entry_info_title_div {
+  background: #000000;
+  margin-bottom: 10%;
+  /*margin-top: 10%;*/
+  text-align: center;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 20px;
+  color: #F5F5F5;
+  width: 100%;
 }
 
 #customer_name {
@@ -235,7 +247,7 @@ margin-right: 0%;
   margin-bottom: 10%;
   margin-right: 5%;
   margin-left: 5%;
-  border: solid 1px #666666;
+  border: solid 1px #000000;
 }
 
 #product_qty {
@@ -247,7 +259,7 @@ margin-right: 0%;
   font-weight: bold;
   min-height: 60px;
   text-align: center;
-  border: solid 1px #666666;
+  border: solid 1px #000000;
   margin-bottom: 10%;
 }
 
@@ -258,7 +270,7 @@ margin-right: 0%;
   font-size: 30px;
   font-weight: bold;
   min-height: 60px;
-  border: solid 3px #666666;
+  border: solid 3px #000000;
   margin-right: 10%;
   margin-left: 10%;
   border-radius: 5px;
@@ -278,21 +290,12 @@ margin-right: 0%;
   font-size: 30px;
   font-weight: bold;
   min-height: 60px;
-  border: solid 3px #666666;
+  border: solid 3px #000000;
   margin-right: 10%;
   margin-left: 10%;
   border-radius: 5px;
   color: #F5F5F5;
   margin-bottom: 10%;
-}
-
-#pos_table_div {
-  width: 42%;
-  height: 100%;
-  margin-left: 3%;
-  margin-right: 3%;
-  border: 5px solid #666666;
-  border-radius: 15px;
 }
 
 #pos_total_div {
@@ -302,18 +305,19 @@ margin-right: 0%;
   min-height: 200px;
   margin-left: 3%;
   margin-right: 3%;
-  border: 5px solid #666666;
+  border: 5px solid #000000;
   border-radius: 15px;
 }
 
 #pos_total_title_div {
+  background: #000000;
   margin-bottom: 10%;
-  margin-top: 10%;
+  /*margin-top: 10%;*/
   text-align: center;
   font-family: Arial;
   font-weight: bold;
   font-size: 20px;
-  color: #424242;
+  color: #F5F5F5;
   width: 100%;
 }
 
@@ -337,10 +341,10 @@ margin-right: 0%;
   background: #092208;
   width: 80%;
   height: 100%;
-  font-size: 180%;
+  font-size: 150%;
   font-weight: bold;
   min-height: 60px;
-  border: solid 3px #666666;
+  border: solid 3px #000000;
   margin-right: 10%;
   margin-left: 10%;
   border-radius: 5px;
@@ -351,19 +355,6 @@ margin-right: 0%;
   align-items: center;
   /*text-align: center;
   vertical-align: middle;*/
-}
-
-#pos_table_title_div {
-  background: #424242;
-  margin-bottom: 10%;
-  text-align: center;
-  font-family: Arial;
-  font-weight: bold;
-  font-size: 30px;
-  color: #F5F5F5;
-  width: 100%;
-  min-height: 40px;
-  vertical-align: middle;
 }
 
 #pos_clear_div {
@@ -380,10 +371,10 @@ margin-right: 0%;
   background: #800000;
   width: 80%;
   height: 100%;
-  font-size: 180%;
+  font-size: 150%;
   font-weight: bold;
   min-height: 60px;
-  border: solid 3px #666666;
+  border: solid 3px #000000;
   margin-right: 10%;
   margin-left: 10%;
   border-radius: 5px;
@@ -407,10 +398,10 @@ margin-right: 0%;
   background: #152238;
   width: 80%;
   height: 100%;
-  font-size: 180%;
+  font-size: 150%;
   font-weight: bold;
   min-height: 60px;
-  border: solid 3px #666666;
+  border: solid 3px #000000;
   margin-right: 10%;
   margin-left: 10%;
   border-radius: 5px;
@@ -421,6 +412,28 @@ margin-right: 0%;
   align-items: center;
   /*text-align: center;
   vertical-align: middle;*/
+}
+
+#pos_table_div {
+  width: 42%;
+  height: 100%;
+  margin-left: 3%;
+  margin-right: 3%;
+  border: 5px solid #000000;
+  border-radius: 15px;
+}
+
+#pos_table_title_div {
+  background: #000000;
+  margin-bottom: 10%;
+  text-align: center;
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 30px;
+  color: #F5F5F5;
+  width: 100%;
+  min-height: 40px;
+  vertical-align: middle;
 }
 
 /*////////////////////////SALES DASHBOARD///////////////////////////////*/
@@ -434,7 +447,7 @@ margin-right: 0%;
 }
 
 #salesdash_inputs_title_div {
-background: #424242;
+background: #000000;
   margin-bottom: 10%;
 text-align: center;
 font-family: Arial;
@@ -458,7 +471,7 @@ margin-right: 0%;
   min-height: 550px;
   margin-left: 3%;
   margin-right: 3%;
-  border: 5px solid #666666;
+  border: 5px solid #000000;
   border-radius: 15px;
 }
 
@@ -478,7 +491,7 @@ margin-right: 0%;
 }
 
 #analytics_inputs_title_div {
-background: #424242;
+background: #000000;
   margin-bottom: 10%;
 text-align: center;
 font-family: Arial;
@@ -490,4 +503,22 @@ min-height: 40px;
 vertical-align: middle;
 margin-left: 0%;
 margin-right: 0%;
+}
+
+#analytics_inputs_div {
+  width: 30%;
+}
+
+#analytics_display_div {
+  width: 70%;
+  height: 100%;
+  min-height: 550px;
+  margin-left: 3%;
+  margin-right: 3%;
+  border: 5px solid #000000;
+  border-radius: 15px;
+}
+
+#POS_Analytics_ui_1-analytics_display {
+  min-height: 550px;
 }

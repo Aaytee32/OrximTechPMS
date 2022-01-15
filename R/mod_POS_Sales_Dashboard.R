@@ -104,14 +104,14 @@ mod_POS_Sales_Dashboard_server <- function(id){
           #head(group_ds_price,2)
           group_ds_price_order <- group_ds_price[order(-group_ds_price$Price),]
           #head(group_ds_price_order)
-          group_ds_price_300 <- head(group_ds_price_order,input$slider_value_summary)
+          group_ds_price_300 <- head(group_ds_price_order,input$salesdash_sliderInput)
           plot_ly(data = group_ds_price_300, x = ~reorder(Product,-Price), y = ~Price, type = "bar") %>%
             layout(plot_bgcolor = "#000000",
                    paper_bgcolor = "#000000",
                    font = list(color = '#00FFFF'),
                    yaxis = list(title = "Sales"),
                    xaxis = list(title = "Products"),
-                   title = paste("Top ", toString(input$slider_value_summary)," Sales by Product"))
+                   title = paste("Top ", toString(input$salesdash_sliderInput)," Sales by Product"))
         })
       }
     })
@@ -126,7 +126,7 @@ mod_POS_Sales_Dashboard_server <- function(id){
           #head(group_ds_price,2)
           group_ds_price_order <- group_ds_price[order(-group_ds_price$Price),]
           #head(group_ds_price_order)
-          group_ds_price_tail <- tail(group_ds_price_order,input$slider_value_summary)
+          group_ds_price_tail <- tail(group_ds_price_order,input$salesdash_sliderInput)
           plot_ly(data = group_ds_price_tail, 
                   x = ~reorder(Product,-Price), 
                   y = ~Price,
@@ -137,7 +137,7 @@ mod_POS_Sales_Dashboard_server <- function(id){
                    font = list(color = '#00FFFF'),
                    yaxis = list(title = "Sales"),
                    xaxis = list(title = "Products"),
-                   title = paste("Bottom ", toString(input$slider_value_summary)," Sales by Product"))
+                   title = paste("Bottom ", toString(input$salesdash_sliderInput)," Sales by Product"))
         })
       }
     })
@@ -151,7 +151,7 @@ mod_POS_Sales_Dashboard_server <- function(id){
           group_ds_qty <- aggregate(QTY ~ Product, data = ds(), sum)
           group_ds_qty_order <- group_ds_qty[order(-group_ds_qty$QTY),]
           #head(group_ds_price_order)
-          group_ds_qty_top <- head(group_ds_qty_order,input$slider_value_summary)
+          group_ds_qty_top <- head(group_ds_qty_order,input$salesdash_sliderInput)
           
           plot_ly(data = group_ds_qty_top, x = ~reorder(Product,-QTY), y = ~QTY, type = "bar") %>%
             layout(plot_bgcolor = "#000000",
@@ -159,7 +159,7 @@ mod_POS_Sales_Dashboard_server <- function(id){
                    font = list(color = '#00FFFF'),
                    yaxis = list(title = "Total Quantities"),
                    xaxis = list(title = "Products"),
-                   title = paste("Top ", toString(input$slider_value_summary)," Most Dispensed Products"))
+                   title = paste("Top ", toString(input$salesdash_sliderInput)," Most Dispensed Products"))
         })
       }
     })
@@ -173,7 +173,7 @@ mod_POS_Sales_Dashboard_server <- function(id){
           group_ds_qty <- aggregate(QTY ~ Product, data = ds(), sum)
           group_ds_qty_order <- group_ds_qty[order(-group_ds_qty$QTY),]
           #head(group_ds_price_order)
-          group_ds_qty_bottom <- tail(group_ds_qty_order,input$slider_value_summary)
+          group_ds_qty_bottom <- tail(group_ds_qty_order,input$salesdash_sliderInput)
           
           plot_ly(data = group_ds_qty_bottom, 
                   x = ~reorder(Product,-QTY), 
@@ -185,7 +185,7 @@ mod_POS_Sales_Dashboard_server <- function(id){
                    font = list(color = '#00FFFF'),
                    yaxis = list(title = "Total Quantities"),
                    xaxis = list(title = "Products"),
-                   title = paste(toString(input$slider_value_summary)," Least Dispensed Products"))
+                   title = paste(toString(input$salesdash_sliderInput)," Least Dispensed Products"))
         })
       }
     })

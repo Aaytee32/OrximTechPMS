@@ -18,13 +18,8 @@ app_ui <- function(request) {
       includeCSS("inst/app/www/1_custom.css"),
         
         tags$header("Pharmacy Management System"),
-        div(id = "page_links",
-            actionButton(inputId = "pos_page", label = "Point of Sale"),
-            actionButton(inputId = "salesdash_page", label = "Sales Dashboard"),
-            actionButton(inputId = "inventory_page", label = "Inventory"),
-            actionButton(inputId = "analytics_page", label = "Analytics"),
-            actionButton(inputId = "help_page", label = "Help"),
-            actionButton(inputId = "logout_page", label = "Logout")),
+        div(id = "page_links_div",
+            uiOutput("page_links")),
         
         div(id = "main_content_div",
             uiOutput("main_content")

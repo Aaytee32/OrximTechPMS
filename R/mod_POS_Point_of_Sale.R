@@ -61,7 +61,7 @@ mod_POS_Point_of_Sale_ui <- function(id){
                              "Clear")),
             div(id = "pos_new_transaction_div",
                 actionButton("pos_new_transaction", 
-                             "New Transact")))
+                             "New Transact.")))
         
         )
   #)

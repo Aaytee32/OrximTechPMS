@@ -13,14 +13,19 @@ Imports:
     golem,
     htmltools,
     httr,
+    knitr,
+    lubridate,
     plotly,
     processx,
     readr,
     readxl,
+    reshape2,
     shiny,
     shinydashboard,
     shinyjs,
-    thinkr
+    stringr,
+    thinkr,
+    zoo
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
