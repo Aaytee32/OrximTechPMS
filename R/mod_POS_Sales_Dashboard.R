@@ -46,6 +46,7 @@ mod_POS_Sales_Dashboard_ui <- function(id){
                                start = "2020-01-01",
                                end = "2022-01-01"))
         ),
+
         div(id = "salesdash_display_div",
             plotlyOutput(ns("salesdash_display")))
         )
