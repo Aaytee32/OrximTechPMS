@@ -29,6 +29,7 @@ usethis::use_package("lubridate")
 usethis::use_package("reshape2")
 usethis::use_package("knitr")
 usethis::use_package("stringr")
+usethis::use_package("DT")
 
 ## Add modules ----
 ## Create a module infrastructure in R/

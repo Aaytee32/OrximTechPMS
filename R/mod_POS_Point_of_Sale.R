@@ -6,7 +6,8 @@
 #'
 #' @noRd 
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
+#' @import DT
 mod_POS_Point_of_Sale_ui <- function(id){
   ns <- NS(id)
   #tagList(
@@ -20,24 +21,22 @@ mod_POS_Point_of_Sale_ui <- function(id){
             
             column(width = 12,
                    column(width = 6,
-                          selectInput(inputId = "product_name",
-                                      label = "Select Product",
-                                      choices = NULL)),
+                          uiOutput(ns("product_name"))),
                    column(width = 6,
-                          numericInput(inputId = "product_qty",
+                          numericInput(inputId = ns("product_qty"),
                                        label = "Quantity",
                                        value = NULL))),
             
-                        actionButton(inputId = "add_product",
+                        actionButton(inputId = ns("add_product"),
 
                      label = "Add"),
             
             div(id = "del_product_name_div",
-                         selectInput(inputId = "del_product_name",
+                         selectInput(inputId = ns("del_product_name"),
                           label = "Select Product to Delete",
                           choices = NULL)),
         
-            actionButton(inputId = "delete_product",
+            actionButton(inputId = ns("delete_product"),
                          label = "Drop")
             ),
         
@@ -46,7 +45,7 @@ mod_POS_Point_of_Sale_ui <- function(id){
                     paste("Transaction")
                 ),
                 div(id = "pos_table",
-                    tableOutput("pos_table_output"))),
+                    tableOutput(ns("pos_table_output")))),
         
         div(id = "pos_total_div",
             div(id = "pos_total_title_div",
@@ -55,10 +54,10 @@ mod_POS_Point_of_Sale_ui <- function(id){
             div(id = "pos_total_amt",
                 verbatimTextOutput("pos_table_total")),
             div(id = "pos_approve_div",
-                actionButton("pos_approve", 
+                actionButton(ns("pos_approve"), 
                              "Approve")),
             div(id = "pos_clear_div",
-                actionButton("pos_clear", 
+                actionButton(ns("pos_clear"), 
                              "Clear")),
             div(id = "pos_new_transaction_div",
                 actionButton("pos_new_transaction", 
@@ -74,7 +73,56 @@ mod_POS_Point_of_Sale_ui <- function(id){
 mod_POS_Point_of_Sale_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
- 
+    
+    ############################################
+    pharma_data <- reactive({
+      ds <- read_xlsx("C:\\Users\\aoppong\\OneDrive\\Manuscript3\\PharmaDataAnalysis\\sample_pharma_data.xlsx")
+      as.data.frame(ds)
+    })
+    
+    output$product_name <- renderUI({
+      selectInput(inputId = ns("product_name"),
+                  label = "Select Product",
+                  choices = sort(unique(pharma_data()$Product)))
+    })
+    ################ADD########################
+    addv <- reactiveValues()
+    addv$DF <- data.frame(Item = as.character(), 
+                          Qty = as.numeric(), 
+                          Price = as.numeric(),
+                          Total = as.numeric(),
+                          check.names = FALSE)
+    
+    observeEvent(input$add_product, {
+      pharma_data <- pharma_data()
+      newRow <- data.frame(Item = input$product_name, 
+                           Qty = input$product_qty, 
+                           Price = pharma_data[pharma_data['Product'] ==input$product_name, ]["Price"][1,],
+                           Total = input$product_qty * pharma_data[pharma_data['Product'] ==input$product_name, ]["Price"][1,],
+                           check.names = FALSE)
+      addv$DF <- rbind(addv$DF, newRow)
+      
+      output$pos_table_output <- renderTable({
+        addv$DF #%>%
+          #datatable(options = list(searching = FALSE,
+              #                     lengthChange = FALSE))
+      })
+    })
+    
+    ########REMOVE##############
+    remv <- reactiveValues()
+    remv$DF <- c()
+    
+    observeEvent(input$add_product,{
+      updateSelectInput(inputId = "del_product_name", 
+                        label = "Select Product to Delete", 
+                        choices = c(addv$DF$Item))
+    })
+    
+    observeEvent(input$delete_product,{
+      remv$DF <- input$del_product_name
+      addv$DF <- filter(addv$DF, !(Item %in% remv$DF))
+    })
   })
 }
     

@@ -125,7 +125,7 @@ footer {
   height: 100%; 
   width: 100%; 
   font-size: 20px;
-  min-height: 60px;
+  min-height: 40px;
   border: solid 1px #000000;
   margin-bottom: 5%;
   vertical-align: middle;
@@ -241,7 +241,7 @@ margin-right: 0%;
   height: 100%;
   font-size: 20px;
   /*background: blue;*/
-  min-height: 60px;
+  min-height: 40px;
   text-align: center;
   margin-top: 10%;
   margin-bottom: 10%;
@@ -250,26 +250,26 @@ margin-right: 0%;
   border: solid 1px #000000;
 }
 
-#product_qty {
+#POS_Point_of_Sale_ui_1-product_qty {
   /*background: blue;*/
-  font-size: 30px;
+  font-size: 20px;
   width: 100%;
   height: 100%;
   display: block;
   font-weight: bold;
-  min-height: 60px;
+  min-height: 40px;
   text-align: center;
   border: solid 1px #000000;
   margin-bottom: 10%;
 }
 
-#add_product {
+#POS_Point_of_Sale_ui_1-add_product {
   background: #092208;
   width: 80%;
   height: 100%;
   font-size: 30px;
   font-weight: bold;
-  min-height: 60px;
+  min-height: 40px;
   border: solid 3px #000000;
   margin-right: 10%;
   margin-left: 10%;
@@ -283,7 +283,7 @@ margin-right: 0%;
   margin-left: 10%;
 }
 
-#delete_product {
+#POS_Point_of_Sale_ui_1-delete_product {
   background: #800000;
   width: 80%;
   height: 100%;
@@ -321,7 +321,6 @@ margin-right: 0%;
   width: 100%;
 }
 
-
 #pos_total_amt {
   width: 80%;
   height: 100%;
@@ -337,7 +336,7 @@ margin-right: 0%;
   vertical-align: middle;
 }
 
-#pos_approve {
+#POS_Point_of_Sale_ui_1-pos_approve {
   background: #092208;
   width: 80%;
   height: 100%;
@@ -367,7 +366,7 @@ margin-right: 0%;
   vertical-align: middle;
 }
 
-#pos_clear {
+#POS_Point_of_Sale_ui_1-pos_clear {
   background: #800000;
   width: 80%;
   height: 100%;
@@ -425,7 +424,7 @@ margin-right: 0%;
 
 #pos_table_title_div {
   background: #000000;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
   text-align: center;
   font-family: Arial;
   font-weight: bold;
@@ -436,13 +435,26 @@ margin-right: 0%;
   vertical-align: middle;
 }
 
+#POS_Point_of_Sale_ui_1-pos_table_output {
+  min-height: 50px;
+  /*min-width: 80%;*/
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  display: flex;
+  justify-content: center;
+  /*justify-content: space-between;
+  align-items: center;*/
+}
+}
+
 /*////////////////////////SALES DASHBOARD///////////////////////////////*/
 #salesdash_div {
   /*justify-content: space-between;
   margin-left: 5%;
   margin-right: 5%;*/
   height: 100%;
-  min-height: 550px;
+  min-height: 500px;
   display: flex;
 }
 
@@ -492,7 +504,7 @@ margin-right: 0%;
 
 #analytics_inputs_title_div {
 background: #000000;
-  margin-bottom: 10%;
+margin-bottom: 10%;
 text-align: center;
 font-family: Arial;
 font-weight: bold;
