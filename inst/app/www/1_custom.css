@@ -346,6 +346,9 @@ margin-right: 0%;
   border-radius: 5px;
   color: #F5F5F5;
   margin-bottom: 10%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
   /*text-align: center;
   vertical-align: middle;*/
 }
@@ -413,6 +416,9 @@ margin-right: 0%;
   border-radius: 5px;
   color: #F5F5F5;
   margin-bottom: 10%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
   /*text-align: center;
   vertical-align: middle;*/
 }
@@ -423,7 +429,7 @@ margin-right: 0%;
   margin-left: 5%;
   margin-right: 5%;*/
   height: 100%;
-  min-height: 500px;
+  min-height: 550px;
   display: flex;
 }
 
@@ -442,16 +448,23 @@ margin-left: 0%;
 margin-right: 0%;
 }
 
+#salesdash_inputs_div {
+  width: 30%;
+}
+
 #salesdash_display_div {
-  width: 42%;
+  width: 70%;
   height: 100%;
+  min-height: 550px;
   margin-left: 3%;
   margin-right: 3%;
   border: 5px solid #666666;
   border-radius: 15px;
 }
 
-/*POS_Sales_Dashboard_ui_1*/
+#POS_Sales_Dashboard_ui_1-salesdash_display {
+  min-height: 550px;
+}
 
 
 /*///////////////////ANALYTICS LINKS//////////////////////////////////*/
