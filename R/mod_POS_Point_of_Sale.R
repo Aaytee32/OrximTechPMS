@@ -11,8 +11,9 @@ mod_POS_Point_of_Sale_ui <- function(id){
   ns <- NS(id)
   #tagList(
     div(id = "pos_div",
-        
         div(id = "pos_entry_info_div",
+            div(id = "pos_entry_info_title_div",
+                paste("Entries")),
             textInput(inputId = "customer_name",
                       label = NULL,
                       placeholder = "Customer Name"),
@@ -61,7 +62,7 @@ mod_POS_Point_of_Sale_ui <- function(id){
                              "Clear")),
             div(id = "pos_new_transaction_div",
                 actionButton("pos_new_transaction", 
-                             "New Transact.")))
+                             HTML("New<br/>Transaction"))))
         
         )
   #)
