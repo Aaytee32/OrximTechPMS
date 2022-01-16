@@ -12,6 +12,7 @@
 #' @import lubridate
 #' @import reshape2
 #' @import dplyr
+#' @import RSQLite
 mod_POS_Analytics_ui <- function(id){
   ns <- NS(id)
   #tagList(
@@ -21,6 +22,15 @@ mod_POS_Analytics_ui <- function(id){
             
             div(id = "analytics_inputs_title_div",
                 paste("Features")),
+            
+            div(id = "analytics_dateRangeInput_div",
+                dateRangeInput(inputId = ns("analytics_dateRangeInput"),
+                               label = "Select Range",
+                               start = "2020-01-01",
+                               end = "2022-01-01")),
+            
+            div(id = "analytics_sql_table_input_div",
+                uiOutput(ns("analytics_sql_table_input"))),
             
             div(id = "analytics_selectInput_div",
                 selectInput(inputId = ns("analytics_selectInput"),
@@ -39,13 +49,7 @@ mod_POS_Analytics_ui <- function(id){
                             label = "Summary",
                             min = 0,
                             max = 1500,
-                            value = 100)),
-            
-            div(id = "analytics_dateRangeInput_div",
-                dateRangeInput(inputId = ns("analytics_dateRangeInput"),
-                               label = "Select Range",
-                               start = "2020-01-01",
-                               end = "2022-01-01"))
+                            value = 100))
         ),
         div(id = "analytics_display_div",
             plotlyOutput(ns("analytics_display"))))
@@ -59,9 +63,35 @@ mod_POS_Analytics_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
     
-    ds <- reactive({
-      ds <- read_xlsx("C:\\Users\\aoppong\\OneDrive\\Manuscript3\\PharmaDataAnalysis\\sample_pharma_data.xlsx")
-      as.data.frame(ds)
+    #################IMPORT DATABASE##########################
+    sql_database <- reactive({
+      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/test_pharma_database.db")
+    })
+    
+    sql_table <- reactive({
+      sql_table <- dbReadTable(sql_database(), "All Sales")
+      
+      ds1 <- sql_table %>%
+        mutate(date_split = str_split(Timestamp, pattern = " ",simplify = TRUE)) %>%
+        as.matrix() %>%
+        as.data.frame() %>%
+        mutate(split = str_split(date_split.1,pattern = "-",simplify = TRUE)) %>%
+        mutate(date_split.1, Weekday = weekdays(ymd(date_split.1))) %>%
+        as.matrix() %>%
+        as.data.frame()%>%
+        mutate(Month_Year = paste(split.2,split.1, sep = "-")) %>%
+        mutate(Txt_Month_Year = as.Date(as.yearmon(paste(split.1,split.2, sep = "-")))) %>%
+        mutate(split.2, Month = month.name[as.numeric(split.2)]) %>%
+        mutate(Total1 = as.numeric(Total)) %>%
+        mutate(QTY1 = as.numeric(QTY))
+      
+      names(ds1) <- c("Timestamp","Worker","Product","QTY_char","Price","Total_char","Date", 
+                      "Time","Year","Month_num","Day","Weekday","Month_Year",   
+                      "Txt_Month_Year","Month","Total","QTY")
+      new_ds <- ds1 %>%
+        select("Date", "Day", "Month", "Year", "Weekday","Txt_Month_Year", "Worker","Product","QTY", "Price", "Total", "Txt_Month_Year","Month")
+      new_ds %>%
+        subset(Date>=input$analytics_dateRangeInput[1] & Date<=input$analytics_dateRangeInput[2])
     })
     ###########################################################
     observeEvent(input$analytics_selectInput,{
@@ -103,38 +133,15 @@ mod_POS_Analytics_server <- function(id){
       }
     })
     
-    
-    #############################################################
-    new_ds <- reactive({
-      
-      ds1 <- ds() %>%
-        select(Date,Price) %>%
-        mutate(split = str_split(Date,pattern = "/",simplify = TRUE)) %>%
-        select(Date,split,Price) %>%
-        mutate(Date, Weekday = weekdays(mdy(Date))) %>%
-        as.matrix() %>%
-        as.data.frame() %>%
-        mutate(Month_Year = paste(split.3,split.1, sep = "-")) %>%
-        mutate(Txt_Month_Year = as.Date(as.yearmon(paste(split.3,split.1, sep = "-")))) %>%
-        mutate(split.1, Month = month.name[as.numeric(split.1)]) %>%
-        mutate(Price1 = as.numeric(Price))
-      
-      names(ds1) <- c("Date", "Month_Num", "Day", "Year", "Price_Str", "Weekday", "Month_Year","Txt_Month_Year", "Month", "Price")
-      new_ds <- ds1 %>%
-        select("Date", "Month", "Year", "Weekday","Txt_Month_Year", "Price")
-      new_ds
-      
-    })
-    
     ###################SALES BY YEAR###########################
     observeEvent(input$analytics_selectInput_sub,{
       
       if (input$analytics_selectInput_sub == "Sales by Year"){
         output$analytics_display <- renderPlotly({
-          group_ds_year <- aggregate(Price~Year, data = new_ds(), sum)
+          group_ds_year <- aggregate(Total~Year, data = sql_table(), sum)
           plot_ly(data = group_ds_year,
                   x = ~Year,
-                  y = ~Price,
+                  y = ~Total,
                   type = "bar") %>%
             layout(plot_bgcolor = "#000000",
                    paper_bgcolor = "#000000",
@@ -153,10 +160,10 @@ mod_POS_Analytics_server <- function(id){
       if (input$analytics_selectInput_sub == "Sales by Month (Bar)"){
         output$analytics_display <- renderPlotly({
           
-          group_ds_month_bar <- aggregate(Price~Txt_Month_Year, data = new_ds(), sum)
+          group_ds_month_bar <- aggregate(Total~Txt_Month_Year, data = sql_table(), sum)
           group_ds_month_bar %>%
             plot_ly(x = ~Txt_Month_Year,
-                    y = ~Price,
+                    y = ~Total,
                     type = "bar") %>%
             layout(plot_bgcolor = "#000000",
                    paper_bgcolor = "#000000",
@@ -173,10 +180,10 @@ mod_POS_Analytics_server <- function(id){
       if (input$analytics_selectInput_sub == "Sales by Month (Line)"){
         output$analytics_display <- renderPlotly({
           
-          group_ds_month_line <- aggregate(Price~Txt_Month_Year, data = new_ds(), sum)
+          group_ds_month_line <- aggregate(Total~Txt_Month_Year, data = sql_table(), sum)
           group_ds_month_line %>%
             plot_ly(x = ~Txt_Month_Year,
-                    y = ~Price,
+                    y = ~Total,
                     type = "scatter",
                     mode = "lines") %>%
             layout(plot_bgcolor = "#000000",
@@ -194,16 +201,16 @@ mod_POS_Analytics_server <- function(id){
     observeEvent(input$analytics_selectInput_sub,{
       if (input$analytics_selectInput_sub == "Sales by Day"){
         output$analytics_display <- renderPlotly({
-          ds_daily <- ds() %>%
-            select(Date, Price) %>%
-            mutate(mdy(Date))
+          ds_daily <- sql_table() %>%
+            select(Date, Total) %>%
+            mutate(ymd(Date))
           
-          group_ds_daily <- aggregate(Price~mdy(Date), data = ds_daily, sum)
+          group_ds_daily <- aggregate(Total~ymd(Date), data = ds_daily, sum)
           #head(group_ds_daily)
-          colnames(group_ds_daily) <- c("Date","dailySumPrice")
+          colnames(group_ds_daily) <- c("Date","dailySumTotal")
           plot_ly(data = group_ds_daily,
                   x = ~Date,
-                  y = ~dailySumPrice,
+                  y = ~dailySumTotal,
                   type = 'scatter',
                   mode = "lines") %>%
             layout(plot_bgcolor = "#000000",
@@ -223,11 +230,11 @@ mod_POS_Analytics_server <- function(id){
       if (input$analytics_selectInput_sub == "Weekday Performance"){
         output$analytics_display <- renderPlotly({
           
-          group_ds_weekday_bar <- aggregate(Price~Weekday, data = new_ds(), sum)
+          group_ds_weekday_bar <- aggregate(Total~Weekday, data = sql_table(), sum)
           
           plot_ly(data = group_ds_weekday_bar,
-                  x = ~reorder(Weekday,-Price),
-                  y = ~Price,
+                  x = ~reorder(Weekday,-Total),
+                  y = ~Total,
                   type = "bar") %>%
             layout(plot_bgcolor = "#000000",
                    paper_bgcolor = "#000000",
@@ -244,17 +251,17 @@ mod_POS_Analytics_server <- function(id){
     
     ######################EMPLOYEE######################
     ds_worker <- reactive({
-      ds2 <- ds() %>%
-        select(Worker,Price) %>%
-        mutate(Split = str_split(Worker,pattern = "/",simplify = TRUE)) %>%
-        select(Split,Price) %>%
+      ds2 <- sql_table() %>%
+        select(Worker,Total) %>%
+        #mutate(Split = str_split(Worker,pattern = "/",simplify = TRUE)) %>%
+        #select(Split,Total) %>%
         as.matrix() %>%
         as.data.frame() %>%
-        mutate(Price = as.numeric(Price))
+        mutate(Total = as.numeric(Total))
       
-      names(ds2) <- c("A","B", "Worker", "D", "Price")
+      #names(ds2) <- c("A","B", "Worker", "D", "Total")
       ds_worker <- ds2 %>%
-        select(Worker, Price)
+        select(Worker, Total)
       ds_worker
     })
     
@@ -262,12 +269,12 @@ mod_POS_Analytics_server <- function(id){
     observeEvent(input$analytics_selectInput_sub,{
       if (input$analytics_selectInput_sub == "Bar Chart"){    
     output$analytics_display <- renderPlotly({
-      group_ds_worker <- aggregate(Price~Worker, data = ds_worker(), sum)
+      group_ds_worker <- aggregate(Total~Worker, data = ds_worker(), sum)
       #group_ds_worker
       
       plot_ly(data = group_ds_worker,
-              y = ~reorder(Worker,-Price),
-              x = ~Price,
+              y = ~reorder(Worker,-Total),
+              x = ~Total,
               type = "bar") %>%
         layout(plot_bgcolor = "#000000",
                paper_bgcolor = "#000000",
@@ -282,12 +289,12 @@ mod_POS_Analytics_server <- function(id){
     observeEvent(input$analytics_selectInput_sub,{
       if (input$analytics_selectInput_sub == "Pie Chart"){
         output$analytics_display <- renderPlotly({
-          group_ds_worker <- aggregate(Price~Worker, data = ds_worker(), sum)
+          group_ds_worker <- aggregate(Total~Worker, data = ds_worker(), sum)
           #group_ds_worker
           
           plot_ly(data = group_ds_worker,
-                  labels = ~reorder(Worker,-Price),
-                  values = ~Price,
+                  labels = ~reorder(Worker,-Total),
+                  values = ~Total,
                   type = "pie",
                   hole = 0.4) %>%
             layout(plot_bgcolor = "#000000",

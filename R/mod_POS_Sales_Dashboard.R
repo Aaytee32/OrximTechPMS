@@ -22,6 +22,15 @@ mod_POS_Sales_Dashboard_ui <- function(id){
             div(id = "salesdash_inputs_title_div",
                 paste("Features")),
             
+            div(id = "salesdash_dateRangeInput_div",
+                dateRangeInput(inputId = ns("salesdash_dateRangeInput"),
+                               label = "Select Range",
+                               start = "2020-01-01",
+                               end = "2022-01-01")),
+            
+            div(id = "salesdash_sql_table_input_div",
+                uiOutput(ns("salesdash_sql_table_input"))),
+            
             div(id = "salesdash_selectInput_div",
                 selectInput(inputId = ns("salesdash_selectInput"),
                             label = "Choose Feature",
@@ -38,13 +47,7 @@ mod_POS_Sales_Dashboard_ui <- function(id){
                             label = "Summary",
                             min = 0,
                             max = 1500,
-                            value = 100)),
-            
-            div(id = "salesdash_dateRangeInput_div",
-                dateRangeInput(inputId = ns("salesdash_dateRangeInput"),
-                               label = "Select Range",
-                               start = "2020-01-01",
-                               end = "2022-01-01"))
+                            value = 100))
         ),
 
         div(id = "salesdash_display_div",
@@ -60,17 +63,44 @@ mod_POS_Sales_Dashboard_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
     
-    ds <- reactive({
-      ds <- read_xlsx("C:\\Users\\aoppong\\OneDrive\\Manuscript3\\PharmaDataAnalysis\\sample_pharma_data.xlsx")
-      as.data.frame(ds)
+    #################IMPORT DATABASE##########################
+    sql_database <- reactive({
+      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/test_pharma_database.db")
     })
+    
+    sql_table <- reactive({
+      sql_table <- dbReadTable(sql_database(), "All Sales")
+      
+      ds1 <- sql_table %>%
+        mutate(date_split = str_split(Timestamp, pattern = " ",simplify = TRUE)) %>%
+        as.matrix() %>%
+        as.data.frame() %>%
+        mutate(split = str_split(date_split.1,pattern = "-",simplify = TRUE)) %>%
+        mutate(date_split.1, Weekday = weekdays(ymd(date_split.1))) %>%
+        as.matrix() %>%
+        as.data.frame()%>%
+        mutate(Month_Year = paste(split.2,split.1, sep = "-")) %>%
+        mutate(Txt_Month_Year = as.Date(as.yearmon(paste(split.1,split.2, sep = "-")))) %>%
+        mutate(split.2, Month = month.name[as.numeric(split.2)]) %>%
+        mutate(Total1 = as.numeric(Total)) %>%
+        mutate(QTY1 = as.numeric(QTY))
+      
+      names(ds1) <- c("Timestamp","Worker","Product","QTY_char","Price","Total_char","Date", 
+                      "Time","Year","Month_num","Day","Weekday","Month_Year",   
+                      "Txt_Month_Year","Month","Total","QTY")
+      new_ds <- ds1 %>%
+        select("Date", "Day", "Month", "Year", "Weekday","Txt_Month_Year", "Worker","Product","QTY", "Price", "Total", "Txt_Month_Year","Month")
+      new_ds %>%
+        subset(Date>=input$salesdash_dateRangeInput[1] & Date<=input$salesdash_dateRangeInput[2])
+    })
+    
     ######################PRODUCT VS PRICE###########################
     observeEvent(input$salesdash_selectInput,{
       if (input$salesdash_selectInput == "Sales vrs Product"){
         output$salesdash_display <- renderPlotly({
-          group_ds_price <- aggregate(Price ~ Product, data = ds(), sum)
+          group_ds_Total <- aggregate(Total ~ Product, data = sql_table(), sum)
           
-          plot_ly(data = group_ds_price, x = ~reorder(Product,-Price), y = ~Price, type = "bar") %>%
+          plot_ly(data = group_ds_Total, x = ~reorder(Product,-Total), y = ~Total, type = "bar") %>%
             layout(plot_bgcolor = "#000000",
                    paper_bgcolor = "#000000",
                    font = list(color = '#00FFFF'),
@@ -81,12 +111,12 @@ mod_POS_Sales_Dashboard_server <- function(id){
       }
     })
     
-    ###################QTY vs PRICE###########################
+    ###################QTY vs Total###########################
     observeEvent(input$salesdash_selectInput,{
       if (input$salesdash_selectInput == "Sales vrs Quantity"){
         output$salesdash_display <- renderPlotly({
           
-          plot_ly(data = ds(), x = ~QTY, y = ~Price, type = "scatter", mode = "markers") %>%
+          plot_ly(data = sql_table(), x = ~QTY, y = ~Total, type = "scatter", mode = "markers") %>%
             layout(plot_bgcolor = "#000000",
                    paper_bgcolor = "#000000",
                    font = list(color = '#00FFFF'),
@@ -101,12 +131,12 @@ mod_POS_Sales_Dashboard_server <- function(id){
       if (input$salesdash_selectInput == "Top Sales"){
         output$salesdash_display <- renderPlotly({
           
-          group_ds_price <- aggregate(Price ~ Product, data = ds(), sum)
-          #head(group_ds_price,2)
-          group_ds_price_order <- group_ds_price[order(-group_ds_price$Price),]
-          #head(group_ds_price_order)
-          group_ds_price_300 <- head(group_ds_price_order,input$salesdash_sliderInput)
-          plot_ly(data = group_ds_price_300, x = ~reorder(Product,-Price), y = ~Price, type = "bar") %>%
+          group_ds_Total <- aggregate(Total ~ Product, data = sql_table(), sum)
+          #head(group_ds_Total,2)
+          group_ds_Total_order <- group_ds_Total[order(-group_ds_Total$Total),]
+          #head(group_ds_Total_order)
+          group_ds_Total_300 <- head(group_ds_Total_order,input$salesdash_sliderInput)
+          plot_ly(data = group_ds_Total_300, x = ~reorder(Product,-Total), y = ~Total, type = "bar") %>%
             layout(plot_bgcolor = "#000000",
                    paper_bgcolor = "#000000",
                    font = list(color = '#00FFFF'),
@@ -123,14 +153,14 @@ mod_POS_Sales_Dashboard_server <- function(id){
       if (input$salesdash_selectInput == "Bottom Sales"){
         output$salesdash_display <- renderPlotly({
           
-          group_ds_price <- aggregate(Price ~ Product, data = ds(), sum)
-          #head(group_ds_price,2)
-          group_ds_price_order <- group_ds_price[order(-group_ds_price$Price),]
-          #head(group_ds_price_order)
-          group_ds_price_tail <- tail(group_ds_price_order,input$salesdash_sliderInput)
-          plot_ly(data = group_ds_price_tail, 
-                  x = ~reorder(Product,-Price), 
-                  y = ~Price,
+          group_ds_Total <- aggregate(Total ~ Product, data = sql_table(), sum)
+          #head(group_ds_Total,2)
+          group_ds_Total_order <- group_ds_Total[order(-group_ds_Total$Total),]
+          #head(group_ds_Total_order)
+          group_ds_Total_tail <- tail(group_ds_Total_order,input$salesdash_sliderInput)
+          plot_ly(data = group_ds_Total_tail, 
+                  x = ~reorder(Product,-Total), 
+                  y = ~Total,
                   marker = list(color =c("red")), 
                   type = "bar") %>%
             layout(plot_bgcolor = "#000000",
@@ -149,9 +179,9 @@ mod_POS_Sales_Dashboard_server <- function(id){
       if (input$salesdash_selectInput == "Top Quantities"){
         output$salesdash_display <- renderPlotly({
           
-          group_ds_qty <- aggregate(QTY ~ Product, data = ds(), sum)
+          group_ds_qty <- aggregate(QTY ~ Product, data = sql_table(), sum)
           group_ds_qty_order <- group_ds_qty[order(-group_ds_qty$QTY),]
-          #head(group_ds_price_order)
+          #head(group_ds_Total_order)
           group_ds_qty_top <- head(group_ds_qty_order,input$salesdash_sliderInput)
           
           plot_ly(data = group_ds_qty_top, x = ~reorder(Product,-QTY), y = ~QTY, type = "bar") %>%
@@ -171,9 +201,9 @@ mod_POS_Sales_Dashboard_server <- function(id){
       if (input$salesdash_selectInput == "Bottom Quantities"){
         output$salesdash_display <- renderPlotly({
           
-          group_ds_qty <- aggregate(QTY ~ Product, data = ds(), sum)
+          group_ds_qty <- aggregate(QTY ~ Product, data = sql_table(), sum)
           group_ds_qty_order <- group_ds_qty[order(-group_ds_qty$QTY),]
-          #head(group_ds_price_order)
+          #head(group_ds_Total_order)
           group_ds_qty_bottom <- tail(group_ds_qty_order,input$salesdash_sliderInput)
           
           plot_ly(data = group_ds_qty_bottom, 

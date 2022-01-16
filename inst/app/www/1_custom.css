@@ -124,8 +124,8 @@ footer {
 .selectize-input {
   height: 100%; 
   width: 100%; 
-  font-size: 20px;
-  min-height: 40px;
+  font-size: 15px;
+  min-height: 30px;
   border: solid 1px #000000;
   margin-bottom: 5%;
   vertical-align: middle;
@@ -236,7 +236,7 @@ margin-right: 0%;
   width: 100%;
 }
 
-#customer_name {
+#POS_Point_of_Sale_ui_1-customer_name {
   width: 90%;
   height: 100%;
   font-size: 20px;
@@ -250,10 +250,23 @@ margin-right: 0%;
   border: solid 1px #000000;
 }
 
+#POS_Point_of_Sale_ui_1-product_name {
+  /*background: blue;*/
+  font-size: 15px;
+  width: 90%;
+  height: 100%;
+  display: block;
+  min-height: 40px;
+  text-align: center;
+  margin-bottom: 10%;
+  margin-left: 5%;
+  margin-bottom: 5%;
+}
+
 #POS_Point_of_Sale_ui_1-product_qty {
   /*background: blue;*/
   font-size: 20px;
-  width: 100%;
+  width: 90%;
   height: 100%;
   display: block;
   font-weight: bold;
@@ -261,6 +274,8 @@ margin-right: 0%;
   text-align: center;
   border: solid 1px #000000;
   margin-bottom: 10%;
+  margin-left: 5%;
+  margin-bottom: 5%;
 }
 
 #POS_Point_of_Sale_ui_1-add_product {
@@ -322,8 +337,13 @@ margin-right: 0%;
 }
 
 #pos_total_amt {
-  width: 80%;
+  width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
 }
 
 #pos_approve_div {
@@ -383,7 +403,7 @@ margin-right: 0%;
   vertical-align: middle;*/
 }
 
-#pos_new_transaction_div {
+#pos_print_div {
   width: 100%;
   height: 100%;
   display: flex;
@@ -393,7 +413,7 @@ margin-right: 0%;
   vertical-align: middle;
 }
 
-#pos_new_transaction {
+#POS_Point_of_Sale_ui_1-pos_print1 {
   background: #152238;
   width: 80%;
   height: 100%;
@@ -409,6 +429,27 @@ margin-right: 0%;
   display: flex;
   justify-content: center; 
   align-items: center;
+  /*text-align: center;
+  vertical-align: middle;*/
+}
+
+#POS_Point_of_Sale_ui_1-pos_print {
+  background: #152238;
+  width: 100%;
+  height: 100%;
+  font-size: 100%;
+  font-weight: bold;
+  min-height: 60px;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  color: #F5F5F5;
+  /*margin-right: 10%;
+  border: solid 3px #000000;
+  border-radius: 5px;
+  margin-left: 10%;
+  margin-bottom: 10%;
+  */
   /*text-align: center;
   vertical-align: middle;*/
 }
@@ -445,6 +486,21 @@ margin-right: 0%;
   justify-content: center;
   /*justify-content: space-between;
   align-items: center;*/
+}
+
+#POS_Point_of_Sale_ui_1-pos_table_total {
+  background: none;
+  width: 80%;
+  height: 100%;
+  font-size: 60px;
+  font-weight: bold;
+  min-height: 60px;
+  margin-right: 10%;
+  margin-left: 10%;
+  color: #000000;
+  margin-bottom: 10%;
+  /*text-align: center;
+  vertical-align: middle;*/
 }
 
 /*////////////////////////SALES DASHBOARD///////////////////////////////*/
@@ -532,4 +588,82 @@ margin-right: 0%;
 
 #POS_Analytics_ui_1-analytics_display {
   min-height: 550px;
+}
+
+#inventory_div {
+  /*justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;*/
+  height: 100%;
+  min-height: 500px;
+  display: flex;
+}
+
+#inventory_inputs_div {
+  width:30%;
+}
+
+#inventory_inputs_title_div {
+background: #000000;
+margin-bottom: 10%;
+text-align: center;
+font-family: Arial;
+font-weight: bold;
+font-size: 30px;
+color: #F5F5F5;
+  width: 100%;
+min-height: 40px;
+vertical-align: middle;
+margin-left: 0%;
+margin-right: 0%;
+}
+
+#inventory_queried_product_div {
+  width: 80%;
+  min-height: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#inventory_quantity_on_hand_div {
+  width: 80%;
+  min-height: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#inventory_new_quantity_div {
+  width: 80%;
+  min-height: 40px;
+  margin-left: 10%;
+  margin-right: 10%;  
+  font-size: 20px;
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10%;
+}
+
+#inventory_updated_quantity_div {
+  width: 80%;
+  min-height: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#add_quantity_div {
+  width: 80%;
+  min-height: 40px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+#inventory_updated_product_div {
+  width: 70%;
+  height: 100%;
+  min-height: 550px;
+  margin-left: 3%;
+  margin-right: 3%;
+  border: 5px solid #000000;
+  border-radius: 15px;
 }

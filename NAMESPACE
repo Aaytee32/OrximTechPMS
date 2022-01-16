@@ -2,6 +2,7 @@
 
 export(run_app)
 import(DT)
+import(RSQLite)
 import(dplyr)
 import(lubridate)
 import(plotly)
