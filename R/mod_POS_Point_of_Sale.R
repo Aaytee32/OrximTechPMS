@@ -85,7 +85,7 @@ mod_POS_Point_of_Sale_server <- function(id){
     })
     
     sql_table <- reactive({
-      sql_table <- dbReadTable(sql_database(), "Price List")
+      sql_table <- dbReadTable(sql_database(), "PriceList")
     })
     
     output$product_name <- renderUI({

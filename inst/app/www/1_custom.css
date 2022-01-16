@@ -627,28 +627,33 @@ margin-right: 0%;
 
 #inventory_quantity_on_hand_div {
   width: 80%;
-  min-height: 40px;
+  min-height: 70px;
   margin-left: 10%;
   margin-right: 10%;
+  margin-bottom: 5%;
+  color: #000000;
 }
 
 #inventory_new_quantity_div {
   width: 80%;
-  min-height: 40px;
+  min-height: 70px;
   margin-left: 10%;
   margin-right: 10%;  
-  font-size: 20px;
+  font-size: 15px;
   display: block;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 10%;
+  margin-bottom: 5%;
+  color: #000000;
 }
 
 #inventory_updated_quantity_div {
   width: 80%;
-  min-height: 40px;
+  min-height: 70px;
   margin-left: 10%;
   margin-right: 10%;
+  margin-bottom: 5%;
+  color: #000000;
 }
 
 #add_quantity_div {
@@ -656,14 +661,73 @@ margin-right: 0%;
   min-height: 40px;
   margin-left: 10%;
   margin-right: 10%;
+  display: flex;
+  vertical-align: middle;
+  text-align: center;
 }
 
-#inventory_updated_product_div {
+#inventory_updated_product_display_div {
   width: 70%;
   height: 100%;
   min-height: 550px;
   margin-left: 3%;
   margin-right: 3%;
   border: 5px solid #000000;
-  border-radius: 15px;
+  /*border-radius: 15px;*/
+}
+
+#POS_Inventory_ui_1-inventory_quantity_on_hand {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-size: 30px;
+  font-weight: bold;
+  min-height: 40px;
+  justify-content: center; 
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#POS_Inventory_ui_1-inventory_new_quantity {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-size: 30px;
+  font-weight: bold;
+  min-height: 40px;
+  justify-content: center; 
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#POS_Inventory_ui_1-inventory_updated_quantity {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-size: 30px;
+  font-weight: bold;
+  min-height: 40px;
+  justify-content: center; 
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#POS_Inventory_ui_1-add_quantity {
+  background: #092208;
+  width: 80%;
+  height: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  min-height: 40px;
+  border: solid 3px #000000;
+  margin-right: 10%;
+  margin-left: 10%;
+  border-radius: 5px;
+  color: #F5F5F5;
+  margin-bottom: 10%;
+  vertical-align: middle;
+  text-align: center;
 }

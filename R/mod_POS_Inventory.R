@@ -6,7 +6,9 @@
 #'
 #' @noRd 
 #'
-#' @importFrom shiny NS tagList 
+#' @importFrom shiny NS tagList
+#' @import DBI
+#' @import dplyr
 mod_POS_Inventory_ui <- function(id){
   ns <- NS(id)
   #tagList(
@@ -32,8 +34,8 @@ mod_POS_Inventory_ui <- function(id){
         div(id = "inventory_updated_quantity_div",
             verbatimTextOutput(ns("inventory_updated_quantity")))),
         
-        div(id = "inventory_updated_product_div",
-            tableOutput(ns("inventory_updated_product"))))
+        div(id = "inventory_updated_product_display_div",
+            dataTableOutput(ns("inventory_updated_product_display"))))
  # )
 }
     
@@ -50,7 +52,7 @@ mod_POS_Inventory_server <- function(id){
     })
     
     sql_table <- reactive({
-      sql_table <- dbReadTable(sql_database(), "Price List")
+      sql_table <- dbReadTable(sql_database(), "PriceList")
     })
     
     output$inventory_queried_product <- renderUI({
@@ -60,12 +62,41 @@ mod_POS_Inventory_server <- function(id){
     })
     
     output$inventory_quantity_on_hand <- renderPrint({
-      selected_product <- subset(ds,ds$Product == input$inventory_queried_product)
-      cat(paste(selected_product$QTY))
+      price_list <- sql_table()
+      selected_product_df <- subset(price_list, price_list$Product == input$inventory_queried_product)
+      cat(paste(selected_product_df$QTY))
     })
     
-    output$inventory_updated_quantity <- renderPrint({
-      cat(paste(selected_product$QTY))
+    ########################SEND QUERY#######################
+    observeEvent(input$add_quantity,{
+      price_list <- sql_table()
+      selected_product_df <- subset(price_list,price_list$Product == input$inventory_queried_product)
+      qty_update <- as.numeric(selected_product_df$QTY) + as.numeric(input$inventory_new_quantity)
+      selected_product <- paste0('"',paste(input$inventory_queried_product), '"')
+      
+      send_update <- paste0("UPDATE PriceList SET QTY = ", qty_update,
+                           " WHERE Product = ", selected_product, ";")
+      dbSendStatement(sql_database(), send_update)
+      
+      output$inventory_updated_quantity <- renderPrint({
+        cat(paste(qty_update))
+      })
+    })
+    
+    #################UPDATE DATABASE##########################
+    observeEvent(input$add_quantity,{
+      sql_database <- reactive({
+        con <- dbConnect(RSQLite::SQLite(),
+                         dbname = "inst/app/www/pharma_database/test_pharma_database.db")
+      })
+      
+      sql_table <- reactive({
+        sql_table <- dbReadTable(sql_database(), "PriceList")
+      })
+      
+      output$inventory_updated_product_display <- renderDataTable({
+        sql_table()
+      })
     })
  
   })

@@ -31,6 +31,7 @@ usethis::use_package("knitr")
 usethis::use_package("stringr")
 usethis::use_package("DT")
 usethis::use_package("RSQLite")
+usethis::use_package("DBI")
 
 ## Add modules ----
 ## Create a module infrastructure in R/
