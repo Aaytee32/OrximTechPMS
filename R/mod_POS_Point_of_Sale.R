@@ -18,9 +18,9 @@ mod_POS_Point_of_Sale_ui <- function(id){
             div(id = "pos_entry_info_title_div",
                 paste("Entries")),
             
-            textInput(inputId = ns("customer_name"),
+            textInput(inputId = ns("employee_name"),
                       label = NULL,
-                      placeholder = "Customer Name"),
+                      placeholder = "Employee Name"),
             
             uiOutput(ns("product_name")),
             
@@ -81,7 +81,7 @@ mod_POS_Point_of_Sale_server <- function(id){
     })
     #################IMPORT DATABASE##########################
     sql_database <- reactive({
-      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/test_pharma_database.db")
+      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
     })
     
     sql_table <- reactive({
@@ -106,7 +106,7 @@ mod_POS_Point_of_Sale_server <- function(id){
     observeEvent(input$add_product, {
       pharma_data <- sql_table()
       newRow <- data.frame(Timestamp = toString(Sys.time()),
-                           Worker = input$customer_name,
+                           Worker = input$employee_name,
                            Product = input$product_name, 
                            QTY = input$product_qty, 
                            Price = pharma_data[pharma_data['Product'] ==input$product_name, ]["Price"][1,],
@@ -143,7 +143,7 @@ mod_POS_Point_of_Sale_server <- function(id){
 
     ################APPROVE ########################
     observeEvent(input$pos_approve,{
-      #worker_DF <- data.frame(Worker = rep(input$customer_name,length(rownames(addv$DF))))
+      #worker_DF <- data.frame(Worker = rep(input$employee_name,length(rownames(addv$DF))))
       #addv$DF <- cbind(worker_DF, addv$DF)
       dbWriteTable(sql_database(), toString(paste(Sys.Date(),"Daily_Sales",collapse = "")), addv$DF, append =TRUE)
       dbWriteTable(sql_database(), "All Sales", addv$DF, append =TRUE)

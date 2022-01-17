@@ -25,7 +25,7 @@ mod_POS_Inventory_ui <- function(id){
         div(id = "inventory_new_quantity_div",
             numericInput(ns("inventory_new_quantity"),
                          "New Quantity to Add",
-                         value = NULL)),
+                         value = 0)),
         
         div(id = "add_quantity_div",
             actionButton(ns("add_quantity"),
@@ -48,7 +48,7 @@ mod_POS_Inventory_server <- function(id){
     
     #################IMPORT DATABASE##########################
     sql_database <- reactive({
-      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/test_pharma_database.db")
+      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
     })
     
     sql_table <- reactive({
@@ -58,13 +58,13 @@ mod_POS_Inventory_server <- function(id){
     output$inventory_queried_product <- renderUI({
       selectInput(inputId = ns("inventory_queried_product"), 
                   label = "Select Product",
-                  choices = sort(c(sql_table()$Product)))
+                  choices = c(sort(sql_table()$Product)))
     })
     
     output$inventory_quantity_on_hand <- renderPrint({
       price_list <- sql_table()
       selected_product_df <- subset(price_list, price_list$Product == input$inventory_queried_product)
-      cat(paste(selected_product_df$QTY))
+      cat(paste("On Hand:",selected_product_df$QTY))
     })
     
     ########################SEND QUERY#######################
@@ -79,7 +79,7 @@ mod_POS_Inventory_server <- function(id){
       dbSendStatement(sql_database(), send_update)
       
       output$inventory_updated_quantity <- renderPrint({
-        cat(paste(qty_update))
+        cat(paste("Updated:",qty_update))
       })
     })
     
@@ -87,7 +87,7 @@ mod_POS_Inventory_server <- function(id){
     observeEvent(input$add_quantity,{
       sql_database <- reactive({
         con <- dbConnect(RSQLite::SQLite(),
-                         dbname = "inst/app/www/pharma_database/test_pharma_database.db")
+                         dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
       })
       
       sql_table <- reactive({

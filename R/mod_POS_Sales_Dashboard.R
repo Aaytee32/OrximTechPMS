@@ -65,7 +65,7 @@ mod_POS_Sales_Dashboard_server <- function(id){
     
     #################IMPORT DATABASE##########################
     sql_database <- reactive({
-      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/test_pharma_database.db")
+      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
     })
     
     sql_table <- reactive({

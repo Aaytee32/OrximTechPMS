@@ -42,14 +42,14 @@ mod_POS_Analytics_ui <- function(id){
                                         ))),
             
             div(id = "analytics_selectInput_sub_div",
-                uiOutput(ns("analytics_selectInput_sub"))),
+                uiOutput(ns("analytics_selectInput_sub")))#,
             
-            div(id = "analytics_sliderInput_div",
-                sliderInput(inputId = ns("analytics_sliderInput"),
-                            label = "Summary",
-                            min = 0,
-                            max = 1500,
-                            value = 100))
+            #div(id = "analytics_sliderInput_div",
+                #sliderInput(inputId = ns("analytics_sliderInput"),
+                 #           label = "Summary",
+                  #          min = 0,
+                   #         max = 1500,
+                    #        value = 100))
         ),
         div(id = "analytics_display_div",
             plotlyOutput(ns("analytics_display"))))
@@ -65,7 +65,7 @@ mod_POS_Analytics_server <- function(id){
     
     #################IMPORT DATABASE##########################
     sql_database <- reactive({
-      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/test_pharma_database.db")
+      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
     })
     
     sql_table <- reactive({
