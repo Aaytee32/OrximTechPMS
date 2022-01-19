@@ -24,7 +24,7 @@ mod_POS_Point_of_Sale_ui <- function(id){
             
             uiOutput(ns("product_name")),
             
-            verbatimTextOutput(ns("pos_qty_on_hand")),
+                verbatimTextOutput(ns("pos_qty_on_hand")),
             
             numericInput(inputId = ns("product_qty"),
                          label = "Quantity",
@@ -77,13 +77,13 @@ mod_POS_Point_of_Sale_server <- function(id){
     ns <- session$ns
       
     #################IMPORT DATABASE##########################
-    sql_database <- reactive({
-      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
-    })
+    #sql_database <- reactive({
+     # con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+    #})
     
-    sql_table <- reactive({
-      sql_table <- dbReadTable(sql_database(), "PriceList")
-    })
+    #sql_table <- reactive({
+     # sql_table <- dbReadTable(sql_database(), "PriceList")
+    #})
     
     ################SET DATABASE AS REACTIVEVALUE#################
     imported_database <- reactiveValues()
