@@ -148,6 +148,8 @@ min-height: 300px;
 margin-left: 35%;
 margin-right: 35%;
 margin-top: 5%;
+display: flex;
+flex-direction: column;
 }
 
 #login_title_div {
@@ -163,16 +165,20 @@ min-height: 40px;
 vertical-align: middle;
 margin-left: 0%;
 margin-right: 0%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #employee_admin_div {
-  width: 70%%;
+  width: 70%;
   height: 100%;
   margin-left: 15%;
   margin-right: 15%;
   display: flex;
   justify-content: center; 
   align-items: center;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #employee {
@@ -182,6 +188,8 @@ margin-right: 0%;
   font-family: Arial;
   font-weight: bold;
   min-height: 40px;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #admin {
@@ -191,17 +199,23 @@ margin-right: 0%;
   font-family: Arial;
   font-weight: bold;
   min-height: 40px;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #username_div {
   margin-left: 20%;
   margin-right: 20%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #password_div {
   margin-left: 20%;
   margin-right: 20%;
   margin-bottom: 5%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #feedback_div {
@@ -212,6 +226,8 @@ margin-right: 0%;
   margin-bottom: 10%;
   background: #F5F5F5;
   height: 100%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #feedback {
@@ -227,6 +243,8 @@ margin-right: 0%;
   align-items: center;
   font-size: 25px;
   border: none;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 /*////////////////////////POINT OF SALE///////////////////////////////*/
@@ -259,6 +277,8 @@ margin-right: 0%;
   font-size: 20px;
   color: #F5F5F5;
   width: 100%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #POS_Point_of_Sale_ui_1-employee_name {
@@ -273,6 +293,8 @@ margin-right: 0%;
   margin-right: 5%;
   margin-left: 5%;
   border: solid 1px #000000;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #POS_Point_of_Sale_ui_1-product_name {
@@ -286,6 +308,27 @@ margin-right: 0%;
   margin-bottom: 10%;
   margin-left: 5%;
   margin-bottom: 5%;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+pre {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  text-align: center;
+  display: block;
+  padding: 9.5px;
+  font-size: 25px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 #POS_Point_of_Sale_ui_1-product_qty {
@@ -301,6 +344,8 @@ margin-right: 0%;
   margin-bottom: 10%;
   margin-left: 5%;
   margin-bottom: 5%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #POS_Point_of_Sale_ui_1-add_product {
@@ -316,11 +361,15 @@ margin-right: 0%;
   border-radius: 5px;
   color: #F5F5F5;
   margin-bottom: 10%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #del_product_name_div {
   margin-right: 10%;
   margin-left: 10%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #POS_Point_of_Sale_ui_1-delete_product {
@@ -336,6 +385,8 @@ margin-right: 0%;
   border-radius: 5px;
   color: #F5F5F5;
   margin-bottom: 10%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #pos_total_div {
@@ -359,6 +410,8 @@ margin-right: 0%;
   font-size: 20px;
   color: #F5F5F5;
   width: 100%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #pos_total_amt {
@@ -369,6 +422,8 @@ margin-right: 0%;
   align-items: center;
   text-align: center;
   vertical-align: middle;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #pos_approve_div {
@@ -379,6 +434,8 @@ margin-right: 0%;
   align-items: center;
   text-align: center;
   vertical-align: middle;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #POS_Point_of_Sale_ui_1-pos_approve {
@@ -397,8 +454,8 @@ margin-right: 0%;
   display: flex;
   justify-content: center; 
   align-items: center;
-  /*text-align: center;
-  vertical-align: middle;*/
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #pos_clear_div {
@@ -409,6 +466,8 @@ margin-right: 0%;
   align-items: center;
   text-align: center;
   vertical-align: middle;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #POS_Point_of_Sale_ui_1-pos_clear {
@@ -426,6 +485,8 @@ margin-right: 0%;
   margin-bottom: 10%;
   /*text-align: center;
   vertical-align: middle;*/
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #pos_print_div {
@@ -436,6 +497,8 @@ margin-right: 0%;
   align-items: center;
   text-align: center;
   vertical-align: middle;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #POS_Point_of_Sale_ui_1-pos_print1 {
@@ -454,8 +517,8 @@ margin-right: 0%;
   display: flex;
   justify-content: center; 
   align-items: center;
-  /*text-align: center;
-  vertical-align: middle;*/
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #POS_Point_of_Sale_ui_1-pos_print {
@@ -469,14 +532,8 @@ margin-right: 0%;
   justify-content: center; 
   align-items: center;
   color: #F5F5F5;
-  /*margin-right: 10%;
-  border: solid 3px #000000;
-  border-radius: 5px;
-  margin-left: 10%;
-  margin-bottom: 10%;
-  */
-  /*text-align: center;
-  vertical-align: middle;*/
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #pos_table_div {
@@ -499,6 +556,8 @@ margin-right: 0%;
   width: 100%;
   min-height: 40px;
   vertical-align: middle;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #POS_Point_of_Sale_ui_1-pos_table_output {
@@ -509,6 +568,8 @@ margin-right: 0%;
   margin-right: 10%;
   display: flex;
   justify-content: center;
+white-space: normal;
+  word-wrap: break-word;
   /*justify-content: space-between;
   align-items: center;*/
 }
@@ -524,6 +585,8 @@ margin-right: 0%;
   margin-left: 10%;
   color: #000000;
   margin-bottom: 10%;
+white-space: normal;
+  word-wrap: break-word;
   /*text-align: center;
   vertical-align: middle;*/
 }
@@ -551,6 +614,8 @@ min-height: 40px;
 vertical-align: middle;
 margin-left: 0%;
 margin-right: 0%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #salesdash_inputs_div {
@@ -595,6 +660,8 @@ min-height: 40px;
 vertical-align: middle;
 margin-left: 0%;
 margin-right: 0%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #analytics_inputs_div {
@@ -615,80 +682,35 @@ margin-right: 0%;
   min-height: 550px;
 }
 
-#inventory_div {
+/*#########################INVENTORY########################*/
+  #inventory_div {
   /*justify-content: space-between;
-  margin-left: 5%;
-  margin-right: 5%;*/
+margin-left: 5%;
+margin-right: 5%;*/
   height: 100%;
-  min-height: 500px;
-  display: flex;
+min-height: 500px;
+display: flex;
 }
 
 #inventory_inputs_div {
-  width:30%;
+width:30%;
 }
 
 #inventory_inputs_title_div {
-background: #000000;
-margin-bottom: 10%;
-text-align: center;
-font-family: Arial;
-font-weight: bold;
-font-size: 30px;
-color: #F5F5F5;
-  width: 100%;
-min-height: 40px;
-vertical-align: middle;
-margin-left: 0%;
-margin-right: 0%;
-}
-
-#inventory_queried_product_div {
-  width: 80%;
-  min-height: 40px;
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
-#inventory_quantity_on_hand_div {
-  width: 80%;
-  min-height: 70px;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 5%;
-  color: #000000;
-}
-
-#inventory_new_quantity_div {
-  width: 80%;
-  min-height: 70px;
-  margin-left: 10%;
-  margin-right: 10%;  
-  font-size: 15px;
-  display: block;
+  background: #000000;
+  margin-bottom: 10%;
+  text-align: center;
+  font-family: Arial;
   font-weight: bold;
-  text-align: center;
-  margin-bottom: 5%;
-  color: #000000;
-}
-
-#inventory_updated_quantity_div {
-  width: 80%;
-  min-height: 70px;
-  margin-left: 10%;
-  margin-right: 10%;
-  margin-bottom: 5%;
-  color: #000000;
-}
-
-#add_quantity_div {
-  width: 80%;
+  font-size: 30px;
+  color: #F5F5F5;
+  width: 100%;
   min-height: 40px;
-  margin-left: 10%;
-  margin-right: 10%;
-  display: flex;
   vertical-align: middle;
-  text-align: center;
+  margin-left: 0%;
+  margin-right: 0%;
+white-space: normal;
+  word-wrap: break-word;
 }
 
 #inventory_updated_product_display_div {
@@ -701,47 +723,96 @@ margin-right: 0%;
   /*border-radius: 15px;*/
 }
 
-#POS_Inventory_ui_1-inventory_quantity_on_hand {
-  width: 100%;
-  height: 100%;
+#inventory_master_old_product_div {
+width: 80%;
+margin-left: 10%;
+margin-right: 10%;
+}
+
+#inventory_master_new_product_div {
+width: 80%;
+margin-left: 10%;
+margin-right: 10%;
+}
+
+#inventory_new_old_product_div {
+width: 100%;
+}
+
+#POS_Inventory_ui_1-inventory_new_old_product {
+width: 80%;
+min-height: 40px;
+margin-left: 10%;
+margin-right: 10%;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#inventory_queried_product_div {
+width: 100%;
+min-height: 40px;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#POS_Inventory_ui_1-inventory_old_quantity_on_hand {
   display: flex;
-  font-size: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  min-height: 30px;
+  justify-content: center; 
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #000000;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#POS_Inventory_ui_1-inventory_old_current_price {
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+  min-height: 30px;
+  justify-content: center; 
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #000000;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#POS_Inventory_ui_1-inventory_old_updated_quantity {
+  display: flex;
+  font-size: 20px;
   font-weight: bold;
   min-height: 40px;
   justify-content: center; 
   align-items: center;
   text-align: center;
   vertical-align: middle;
+  border: 1px solid #000000;
+white-space: normal;
+  word-wrap: break-word;
 }
 
-#POS_Inventory_ui_1-inventory_new_quantity {
-  width: 100%;
-  height: 100%;
+#POS_Inventory_ui_1-inventory_old_updated_price {
   display: flex;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   min-height: 40px;
   justify-content: center; 
   align-items: center;
   text-align: center;
   vertical-align: middle;
+  border: 1px solid #000000;
+white-space: normal;
+  word-wrap: break-word;
 }
 
-#POS_Inventory_ui_1-inventory_updated_quantity {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  font-size: 30px;
-  font-weight: bold;
-  min-height: 40px;
-  justify-content: center; 
-  align-items: center;
-  text-align: center;
-  vertical-align: middle;
-}
-
-#POS_Inventory_ui_1-add_quantity {
-  background: #092208;
+#POS_Inventory_ui_1-inventory_old_add_quantity {
+background: #092208;
   width: 80%;
   height: 100%;
   font-size: 20px;
@@ -755,4 +826,123 @@ margin-right: 0%;
   margin-bottom: 10%;
   vertical-align: middle;
   text-align: center;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#POS_Inventory_ui_1-inventory_old_new_quantity {
+  width: 100%;
+  min-height: 40px;
+  font-size: 20px;
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5%;
+  color: #000000;
+  border: solid 1px #000000;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#POS_Inventory_ui_1-inventory_old_new_price {
+  width: 100%;
+  min-height: 40px;
+  font-size: 20px;
+  display: block;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5%;
+  color: #000000;
+  border: solid 1px #000000;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#POS_Inventory_ui_1-inventory_old_change_price {
+background: #092208;
+  width: 80%;
+  height: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  min-height: 40px;
+  border: solid 3px #000000;
+  margin-right: 10%;
+  margin-left: 10%;
+  border-radius: 5px;
+  color: #F5F5F5;
+  margin-bottom: 10%;
+  vertical-align: middle;
+  text-align: center;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#POS_Inventory_ui_1-inventory_new_product_name {
+width: 100%;
+height: 100%;
+display: flex;
+font-size: 20px;
+min-height: 20px;
+justify-content: center; 
+align-items: center;
+text-align: center;
+vertical-align: middle;
+border: 1px solid #000000;
+  margin-bottom: 10%;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#POS_Inventory_ui_1-inventory_new_product_price {
+width: 100%;
+height: 100%;
+display: flex;
+font-size: 20px;
+font-weight: bold;
+min-height: 20px;
+justify-content: center; 
+align-items: center;
+text-align: center;
+vertical-align: middle;
+border: 1px solid #000000;
+  margin-bottom: 10%;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#POS_Inventory_ui_1-inventory_new_product_quantity {
+width: 100%;
+height: 100%;
+display: flex;
+font-size: 20px;
+font-weight: bold;
+min-height: 20px;
+justify-content: center; 
+align-items: center;
+text-align: center;
+vertical-align: middle;
+border: 1px solid #000000;
+  margin-bottom: 10%;
+white-space: normal;
+  word-wrap: break-word;
+}
+
+#POS_Inventory_ui_1-inventory_new_add_product {
+background: #092208;
+  width: 80%;
+height: 100%;
+font-size: 20px;
+font-weight: bold;
+min-height: 40px;
+border: solid 3px #000000;
+margin-right: 10%;
+margin-left: 10%;
+border-radius: 5px;
+color: #F5F5F5;
+align-content: flex;
+  margin-bottom: 10%;
+vertical-align: middle;
+text-align: center;
+white-space: normal;
+  word-wrap: break-word;
 }

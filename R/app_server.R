@@ -81,12 +81,15 @@ app_server <- function( input, output, session ) {
   })
   
   observeEvent(input$logout_page,{
+    
+    output$feedback <- renderUI({
+      return()
+    })
+    
+    authv$Enable <- FALSE
+    adminv$Enable <- FALSE
+    
     output$main_content <- renderUI({
-      
-      authv$Enable <- FALSE
-      adminv$Enable <- FALSE
-      shinyjs::reset("feedback")
-      
       #mod_POS_Login_Page_ui("POS_Login_Page_ui_1")
       tagList(
         
@@ -181,10 +184,12 @@ app_server <- function( input, output, session ) {
         authv$Pass %in% auth_password_list()){
       if (which(auth_username_list() == authv$User) == which(auth_password_list() == authv$Pass)){
         authv$Enable <- TRUE
-        shinyjs::hide("employee")
-        shinyjs::hide("admin")
-        shinyjs::hide("username")
-        shinyjs::hide("password")
+        shinyjs::hide("login")
+        shinyjs::show("feedback")
+        #shinyjs::hide("employee")
+        #shinyjs::hide("admin")
+        #shinyjs::hide("username")
+        #shinyjs::hide("password")
         output$feedback <- renderPrint({
           cat(paste("Login Successful!"))
         })
@@ -260,10 +265,12 @@ app_server <- function( input, output, session ) {
         adminv$Pass %in% admin_password_list()){
       if (which(admin_username_list() == adminv$User) == which(admin_password_list() == adminv$Pass)){
         adminv$Enable <- TRUE
-        shinyjs::hide("employee")
-        shinyjs::hide("admin")
-        shinyjs::hide("username")
-        shinyjs::hide("password")
+        shinyjs::hide("login")
+        shinyjs::show("feedback")
+        #shinyjs::hide("employee")
+        #shinyjs::hide("admin")
+        #shinyjs::hide("username")
+        #shinyjs::hide("password")
         output$feedback <- renderPrint({
           cat(paste("Login Successful!"))
         })

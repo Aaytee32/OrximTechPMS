@@ -24,6 +24,8 @@ mod_POS_Point_of_Sale_ui <- function(id){
             
             uiOutput(ns("product_name")),
             
+            verbatimTextOutput(ns("pos_qty_on_hand")),
+            
             numericInput(inputId = ns("product_qty"),
                          label = "Quantity",
                          value = NULL),
@@ -73,12 +75,7 @@ mod_POS_Point_of_Sale_ui <- function(id){
 mod_POS_Point_of_Sale_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
-    
-      output$pos_print1 <- renderUI({
-        actionButton(ns("pos_print"), 
-                     "Print",
-                     disabled = TRUE)
-    })
+      
     #################IMPORT DATABASE##########################
     sql_database <- reactive({
       con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
@@ -88,11 +85,38 @@ mod_POS_Point_of_Sale_server <- function(id){
       sql_table <- dbReadTable(sql_database(), "PriceList")
     })
     
+    ################SET DATABASE AS REACTIVEVALUE#################
+    imported_database <- reactiveValues()
+    imported_database$DB <- NULL
+    
+    extracted_sql_table <- reactiveValues()
+    extracted_sql_table$DB <- NULL
+    
+    observeEvent(input$employee_name,{
+      imported_database$DB <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+      extracted_sql_table$DB <- dbReadTable(imported_database$DB, "PriceList")
+    })
+    
+    #####################GETTING REACTIVE UIs####################
+    output$pos_print1 <- renderUI({
+      actionButton(ns("pos_print"), 
+                   "Print",
+                   disabled = TRUE)
+    })
+    
     output$product_name <- renderUI({
       selectInput(inputId = ns("product_name"), 
                   label = "Enter Product",
-                  choices = sort(c(sql_table()$Product)))
+                  choices = sort(c(extracted_sql_table$DB$Product)))
     })
+    
+    output$pos_qty_on_hand <- renderPrint({
+      pharma_data <- extracted_sql_table$DB
+      qty_on_hand = pharma_data[pharma_data['Product'] ==input$product_name, ]["QTY"][1,]
+      
+      cat(paste("On Hand:", qty_on_hand))
+    })
+    
     ################ADD########################
     addv <- reactiveValues()
     addv$DF <- data.frame(Timestamp = as.character(),
@@ -104,7 +128,7 @@ mod_POS_Point_of_Sale_server <- function(id){
                           check.names = FALSE)
     
     observeEvent(input$add_product, {
-      pharma_data <- sql_table()
+      pharma_data <- extracted_sql_table$DB
       newRow <- data.frame(Timestamp = toString(Sys.time()),
                            Worker = input$employee_name,
                            Product = input$product_name, 
@@ -145,13 +169,49 @@ mod_POS_Point_of_Sale_server <- function(id){
     observeEvent(input$pos_approve,{
       #worker_DF <- data.frame(Worker = rep(input$employee_name,length(rownames(addv$DF))))
       #addv$DF <- cbind(worker_DF, addv$DF)
-      dbWriteTable(sql_database(), toString(paste(Sys.Date(),"Daily_Sales",collapse = "")), addv$DF, append =TRUE)
-      dbWriteTable(sql_database(), "All Sales", addv$DF, append =TRUE)
+      dbWriteTable(imported_database$DB, toString(paste(Sys.Date(),"Daily_Sales",collapse = "")), addv$DF, append =TRUE)
+      dbWriteTable(imported_database$DB, "All Sales", addv$DF, append =TRUE)
       
       output$pos_print1 <- renderUI({
         actionButton(ns("pos_print"), 
                      HTML("Print"))
         })
+      
+      ######################UPDATE MAIN DATABASE AFTER DISPENSING###############
+      temp_lastTransaction <- addv$DF
+      #temp_lastTransaction
+      dbWriteTable(imported_database$DB, "lastTransaction", temp_lastTransaction, overwrite= TRUE)
+      upd_lastTransaction <- dbReadTable(imported_database$DB,"lastTransaction")
+      #upd_lastTransaction
+      product_list <- c(upd_lastTransaction$Product)
+      #product_list
+      quantity_list <- c(upd_lastTransaction$QTY)
+      #quantity_list
+      
+      #iterate over the temporary database and update main database
+      for (idx in 1:length(product_list)){
+        product_name <- product_list[idx]
+        #product_name
+        dispensed_qty <- quantity_list[idx]
+        #dispensed_qty
+        qty_on_hand <- extracted_sql_table$DB %>% 
+          filter(Product == product_name) %>% 
+          select(QTY)
+        #qty_on_hand
+        updated_qty_after_dispensed <- as.numeric(qty_on_hand) - as.numeric(dispensed_qty)
+        #updated_qty_after_dispensed
+        selected_product <- paste0('"',paste(product_name), '"')
+        send_update <- paste0("UPDATE PriceList SET QTY = ", 
+                              updated_qty_after_dispensed,
+                              " WHERE Product = ",
+                              selected_product, ";")
+        #send_update
+        dbSendStatement(imported_database$DB, send_update)
+        
+        #################RELOAD DATABASE AND TABLE#############
+        imported_database$DB <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+        extracted_sql_table$DB <- dbReadTable(imported_database$DB, "PriceList")
+      }
       })
     
     ###################CLEAR TRANSACTION################
