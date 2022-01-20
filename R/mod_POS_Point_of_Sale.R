@@ -7,7 +7,6 @@
 #' @noRd 
 #'
 #' @importFrom shiny NS tagList
-#' @import DT
 #' @import RSQLite
 #' @import dplyr
 mod_POS_Point_of_Sale_ui <- function(id){
@@ -77,14 +76,7 @@ mod_POS_Point_of_Sale_server <- function(id){
     ns <- session$ns
       
     #################IMPORT DATABASE##########################
-    #sql_database <- reactive({
-     # con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
-    #})
-    
-    #sql_table <- reactive({
-     # sql_table <- dbReadTable(sql_database(), "PriceList")
-    #})
-    
+  
     ################SET DATABASE AS REACTIVEVALUE#################
     imported_database <- reactiveValues()
     imported_database$DB <- NULL
@@ -93,8 +85,10 @@ mod_POS_Point_of_Sale_server <- function(id){
     extracted_sql_table$DB <- NULL
     
     observeEvent(input$employee_name,{
-      imported_database$DB <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
-      extracted_sql_table$DB <- dbReadTable(imported_database$DB, "PriceList")
+      imported_database$DB <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+      
+      extracted_sql_table$DB <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+                                          db_table = "PriceList")
     })
     
     #####################GETTING REACTIVE UIs####################
@@ -157,7 +151,11 @@ mod_POS_Point_of_Sale_server <- function(id){
     
     observeEvent(input$delete_product,{
       remv$DF <- input$del_product_name
-      addv$DF <- filter(addv$DF, !(Product %in% remv$DF))
+      #addv$DF <- filter(addv$DF, !(Product %in% remv$DF))
+      #addv$DF <- addv$DF %>% filter(!Product = remv$DF)
+      
+      to_drop <- which(with( addv$DF, Product == remv$DF ))
+      addv$DF <- addv$DF[-to_drop,]
     })
     
     ##################TOTAL AMOUNT################################
@@ -167,17 +165,21 @@ mod_POS_Point_of_Sale_server <- function(id){
 
     ################APPROVE ########################
     observeEvent(input$pos_approve,{
+      output$pos_print1 <- renderUI({
+        actionButton(ns("pos_print"),
+                     HTML("Print"))
+      })
+    })
+    
+    observeEvent(input$pos_approve,{
       #worker_DF <- data.frame(Worker = rep(input$employee_name,length(rownames(addv$DF))))
       #addv$DF <- cbind(worker_DF, addv$DF)
       dbWriteTable(imported_database$DB, toString(paste(Sys.Date(),"Daily_Sales",collapse = "")), addv$DF, append =TRUE)
       dbWriteTable(imported_database$DB, "All Sales", addv$DF, append =TRUE)
-      
-      output$pos_print1 <- renderUI({
-        actionButton(ns("pos_print"), 
-                     HTML("Print"))
-        })
+    })
       
       ######################UPDATE MAIN DATABASE AFTER DISPENSING###############
+    observeEvent(input$pos_approve,{
       temp_lastTransaction <- addv$DF
       #temp_lastTransaction
       dbWriteTable(imported_database$DB, "lastTransaction", temp_lastTransaction, overwrite= TRUE)
@@ -194,12 +196,18 @@ mod_POS_Point_of_Sale_server <- function(id){
         #product_name
         dispensed_qty <- quantity_list[idx]
         #dispensed_qty
-        qty_on_hand <- extracted_sql_table$DB %>% 
-          filter(Product == product_name) %>% 
-          select(QTY)
+        
+        #qty_on_hand <- sql_table %>% filter(Product == product_name) %>% select(QTY)
         #qty_on_hand
+        
+        qty_on_hand_product <- subset(extracted_sql_table$DB, 
+                                      Product == product_name, 
+                                      select= QTY)
+        qty_on_hand <- qty_on_hand_product$QTY
+        
         updated_qty_after_dispensed <- as.numeric(qty_on_hand) - as.numeric(dispensed_qty)
         #updated_qty_after_dispensed
+        
         selected_product <- paste0('"',paste(product_name), '"')
         send_update <- paste0("UPDATE PriceList SET QTY = ", 
                               updated_qty_after_dispensed,
@@ -209,9 +217,16 @@ mod_POS_Point_of_Sale_server <- function(id){
         dbSendStatement(imported_database$DB, send_update)
         
         #################RELOAD DATABASE AND TABLE#############
-        imported_database$DB <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
-        extracted_sql_table$DB <- dbReadTable(imported_database$DB, "PriceList")
+        #imported_database$DB <- load_db(db_name = "")
+        #extracted_sql_table$DB <- open_db_table(, "PriceList")
+        
+        #imported_database$DB <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+        
+        extracted_sql_table$DB <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+                                   db_table = "PriceList")
+
       }
+      
       })
     
     ###################CLEAR TRANSACTION################

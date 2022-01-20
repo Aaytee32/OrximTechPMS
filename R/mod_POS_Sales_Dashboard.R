@@ -8,8 +8,6 @@
 #'
 #' @importFrom shiny NS tagList
 #' @import plotly
-#' @import readr
-#' @import readxl
 mod_POS_Sales_Dashboard_ui <- function(id){
   ns <- NS(id)
   #tagList(
@@ -64,12 +62,19 @@ mod_POS_Sales_Dashboard_server <- function(id){
     ns <- session$ns
     
     #################IMPORT DATABASE##########################
-    sql_database <- reactive({
-      con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
-    })
+    sql_database <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+
+    all_sales_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+                               db_table = "All Sales")
     
+    
+    #sql_database <- reactive({
+     # con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+    #})
+    
+    #sql_table <- all_sales_dataframe(db_table = all_sales_db_table)
     sql_table <- reactive({
-      sql_table <- dbReadTable(sql_database(), "All Sales")
+      sql_table <- all_sales_db_table
       
       ds1 <- sql_table %>%
         mutate(date_split = str_split(Timestamp, pattern = " ",simplify = TRUE)) %>%
@@ -93,6 +98,7 @@ mod_POS_Sales_Dashboard_server <- function(id){
       new_ds %>%
         subset(Date>=input$salesdash_dateRangeInput[1] & Date<=input$salesdash_dateRangeInput[2])
     })
+    
     
     ######################PRODUCT VS PRICE###########################
     observeEvent(input$salesdash_selectInput,{

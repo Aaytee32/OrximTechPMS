@@ -15,7 +15,7 @@ app_ui <- function(request) {
     fluidPage(
       #h1("OrximTechPMS"),
       useShinyjs(),
-      includeCSS("inst/app/www/1_custom.css"),
+      #includeCSS("inst/app/www/1_custom.css"),
         
         tags$header("Pharmacy Management System"),
         div(id = "page_links_div",
@@ -50,6 +50,7 @@ golem_add_external_resources <- function(){
       path = app_sys('app/www'),
       app_title = 'OrximTechPMS'
     )
+    #,tags$link(rel="stylesheet", type="text/css", href="www/1_custom.css")
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert() 
   )

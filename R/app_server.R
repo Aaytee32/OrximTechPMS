@@ -5,6 +5,8 @@
 #' @import shiny
 #' @import shinyjs
 #' @import plotly
+#' @import RSQLite
+#' @import DBI
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic
@@ -138,34 +140,24 @@ app_server <- function( input, output, session ) {
   mod_POS_Logout_server("POS_Logout_ui_1")
   
   
-  
-  
-  
-  
-  
-  
   #####################TESTING LOGIN HERE#############################
   
   
   ###########################IMPORT DATABASE##########################
-  sql_database <- reactive({
-    sql_database <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
-    sql_database
-  })
+  #sql_database <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+  employee_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+                                     db_table = "AuthenticationTable")
+  admin_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+                                  db_table = "AdminTable")
   
   ##########################FOR EMPLOYEES ONLY#######################
-  sql_table_authen_df <- reactive({
-    sql_table_authen_df <- dbReadTable(sql_database(), "AuthenticationTable")
-    sql_table_authen_df
-  })
-  
   auth_username_list <- reactive({
-    username_list <- c(sql_table_authen_df()$Username)
+    username_list <- c(employee_db_table$Username)
     username_list
   })
   
   auth_password_list <- reactive({
-    password_list <- c(sql_table_authen_df()$Password)
+    password_list <- c(employee_db_table$Password)
     password_list
   })
   #########################Conditions for log in##################################
@@ -186,10 +178,6 @@ app_server <- function( input, output, session ) {
         authv$Enable <- TRUE
         shinyjs::hide("login")
         shinyjs::show("feedback")
-        #shinyjs::hide("employee")
-        #shinyjs::hide("admin")
-        #shinyjs::hide("username")
-        #shinyjs::hide("password")
         output$feedback <- renderPrint({
           cat(paste("Login Successful!"))
         })
@@ -235,18 +223,18 @@ app_server <- function( input, output, session ) {
   
   
   ##########################FOR ADMIN ONLY###########################
-  sql_table_admin_df <- reactive({
-    sql_table_admin_df <- dbReadTable(sql_database(), "AdminTable")
-    sql_table_admin_df
-  })
+  #sql_table_admin_df <- reactive({
+   # sql_table_admin_df <- dbReadTable(sql_database(), "AdminTable")
+    #sql_table_admin_df
+  #})
   
   admin_username_list <- reactive({
-    username_list <- c(sql_table_admin_df()$Username)
+    username_list <- c(admin_db_table$Username)
     username_list
   })
   
   admin_password_list <- reactive({
-    password_list <- c(sql_table_admin_df()$Password)
+    password_list <- c(admin_db_table$Password)
     password_list
   })
   #########################Conditions for log in##################################
@@ -267,10 +255,6 @@ app_server <- function( input, output, session ) {
         adminv$Enable <- TRUE
         shinyjs::hide("login")
         shinyjs::show("feedback")
-        #shinyjs::hide("employee")
-        #shinyjs::hide("admin")
-        #shinyjs::hide("username")
-        #shinyjs::hide("password")
         output$feedback <- renderPrint({
           cat(paste("Login Successful!"))
         })
