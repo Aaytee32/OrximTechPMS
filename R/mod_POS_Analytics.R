@@ -7,14 +7,7 @@
 #' @noRd 
 #'
 #' @importFrom shiny NS tagList
-#' @import stringr
-#' @import zoo
-#' @import lubridate
-#' @import reshape2
-#' @import dplyr
-#' @import RSQLite
-#' @import stats
-#' @import utils
+#' @import shiny
 mod_POS_Analytics_ui <- function(id){
   ns <- NS(id)
   #tagList(

@@ -7,8 +7,6 @@
 #' @noRd 
 #'
 #' @importFrom shiny NS tagList
-#' @import DBI
-#' @import dplyr
 mod_POS_Inventory_ui <- function(id){
   ns <- NS(id)
   #tagList(
@@ -34,7 +32,7 @@ mod_POS_Inventory_ui <- function(id){
 }
     
 #' POS_Inventory Server Functions
-#'
+#' @import shinyjs
 #' @noRd 
 mod_POS_Inventory_server <- function(id){
   moduleServer( id, function(input, output, session){
@@ -46,14 +44,6 @@ mod_POS_Inventory_server <- function(id){
     pricelist_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
                                        db_table = "PriceList")
     
-    
-    #sql_database <- reactive({
-     # con <- dbConnect(RSQLite::SQLite(),dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
-    #})
-    
-    #sql_table <- reactive({
-     # sql_table <- dbReadTable(sql_database(), "PriceList")
-    #})
     
     output$inventory_new_old_product <- renderUI({
       selectInput(inputId = ns("inventory_new_old_product"),
@@ -135,14 +125,24 @@ mod_POS_Inventory_server <- function(id){
         shinyjs::show("inventory_master_new_product")
       }
       
-      else if (input$inventory_new_old_product == "Update Old Product"){
+      if (input$inventory_new_old_product == "Update Old Product"){
         shinyjs::show("inventory_master_old_product")
         shinyjs::hide("inventory_master_new_product")
       }
       
-      else if (input$inventory_new_old_product == "Select"){
+      if (input$inventory_new_old_product == "Select"){
         shinyjs::hide("inventory_master_old_product")
         shinyjs::hide("inventory_master_new_product")
+        
+        shinyjs::hide("inventory_old_quantity_on_hand")
+        shinyjs::hide("inventory_old_new_quantity")
+        shinyjs::hide("inventory_old_add_quantity")
+        shinyjs::hide("inventory_old_updated_quantity")
+        
+        shinyjs::hide("inventory_old_current_price")
+        shinyjs::hide("inventory_old_new_price")
+        shinyjs::hide("inventory_old_change_price")
+        shinyjs::hide("inventory_old_updated_price")
       }
     })
     
@@ -154,14 +154,13 @@ mod_POS_Inventory_server <- function(id){
         shinyjs::hide("inventory_old_add_quantity")
         shinyjs::hide("inventory_old_updated_quantity")
         
-        
         shinyjs::show("inventory_old_current_price")
         shinyjs::show("inventory_old_new_price")
         shinyjs::show("inventory_old_change_price")
         shinyjs::show("inventory_old_updated_price")
       }
       
-      else if (input$inventory_old_price_quantity == "Quantity"){
+      if (input$inventory_old_price_quantity == "Quantity"){
         shinyjs::show("inventory_old_quantity_on_hand")
         shinyjs::show("inventory_old_new_quantity")
         shinyjs::show("inventory_old_add_quantity")
@@ -174,7 +173,7 @@ mod_POS_Inventory_server <- function(id){
         shinyjs::hide("inventory_old_updated_price")
       }
       
-      else if (input$inventory_old_price_quantity == "Select"){
+      if (input$inventory_old_price_quantity == "Select"){
         shinyjs::hide("inventory_old_current_price")
         shinyjs::hide("inventory_old_new_price")
         shinyjs::hide("inventory_old_change_price")
@@ -256,15 +255,6 @@ mod_POS_Inventory_server <- function(id){
       
       pricelist_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
                                           db_table = "PriceList")
-      
-      #sql_database <- reactive({
-       # con <- dbConnect(RSQLite::SQLite(),
-        #                 dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
-      #})
-      
-      #sql_table <- reactive({
-       # sql_table <- dbReadTable(sql_database, "PriceList")
-      #})
       
       output$inventory_updated_product_display <- renderDataTable({
         pricelist_db_table

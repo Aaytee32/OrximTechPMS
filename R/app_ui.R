@@ -5,7 +5,6 @@
 #' @import shiny
 #' @import shinydashboard
 #' @import shinyjs
-#' @import plotly
 #' @noRd
 app_ui <- function(request) {
   tagList(
@@ -15,7 +14,8 @@ app_ui <- function(request) {
     fluidPage(
       #h1("OrximTechPMS"),
       useShinyjs(),
-      #includeCSS("inst/app/www/1_custom.css"),
+      tags$link(rel="stylesheet", type="text/css", href="www/1_custom.css"),
+      #includeCSS("www/1_custom.css"),
         
         tags$header("Pharmacy Management System"),
         div(id = "page_links_div",

@@ -4,9 +4,12 @@
 #'     DO NOT REMOVE.
 #' @import shiny
 #' @import shinyjs
-#' @import plotly
-#' @import RSQLite
 #' @import DBI
+#' @import RSQLite
+#' @import plotly
+#' @import zoo
+#' @import lubridate
+#' @import dplyr
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic

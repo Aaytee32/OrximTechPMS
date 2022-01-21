@@ -571,8 +571,18 @@ white-space: normal;
   width: 100%;
   min-height: 40px;
   vertical-align: middle;
-white-space: normal;
+  white-space: normal;
   word-wrap: break-word;
+  display:table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+th,td {
+    border-style: solid;
+    border-width: 5px;
+    border-color: #BCBCBC;
+    word-wrap: break-word;
 }
 
 #POS_Point_of_Sale_ui_1-pos_table_output {
@@ -582,6 +592,7 @@ white-space: normal;
   margin-left: 10%;
   margin-right: 10%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
 white-space: normal;
   word-wrap: break-word;

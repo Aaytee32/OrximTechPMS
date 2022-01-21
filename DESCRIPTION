@@ -8,34 +8,34 @@ Imports:
     attempt,
     config,
     DBI,
-    dplyr,
-    DT,
     glue,
     golem,
     htmltools,
-    httr,
     knitr,
-    lubridate,
     plotly,
     processx,
-    readr,
-    readxl,
     reshape2,
     RSQLite,
     shiny,
     shinydashboard,
     shinyjs,
-    stats,
-    stringr,
     thinkr,
-    utils,
-    zoo
+    utils
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
 Suggests: 
+    httr,
+    dplyr,
     spelling,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    readr,
+    readxl,
+    zoo,
+    lubridate,
+    stringr,
+    DT,
+    stats
 Config/testthat/edition: 3
 Language: en-US
 URL: https://github.com/Aaytee32/OrximTechPMS

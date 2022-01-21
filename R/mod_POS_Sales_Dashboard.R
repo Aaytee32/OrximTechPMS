@@ -7,7 +7,6 @@
 #' @noRd 
 #'
 #' @importFrom shiny NS tagList
-#' @import plotly
 mod_POS_Sales_Dashboard_ui <- function(id){
   ns <- NS(id)
   #tagList(

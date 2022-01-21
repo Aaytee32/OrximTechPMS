@@ -7,8 +7,6 @@
 #' @noRd 
 #'
 #' @importFrom shiny NS tagList
-#' @import RSQLite
-#' @import dplyr
 mod_POS_Point_of_Sale_ui <- function(id){
   ns <- NS(id)
   #tagList(
