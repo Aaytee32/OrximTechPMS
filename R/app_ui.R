@@ -5,6 +5,7 @@
 #' @import shiny
 #' @import shinydashboard
 #' @import shinyjs
+#' @importFrom rlang .data
 #' @noRd
 app_ui <- function(request) {
   tagList(

@@ -7,7 +7,10 @@
 #' @noRd 
 #'
 #' @importFrom shiny NS tagList
-#' @import shiny
+#' @import shiny 
+#' @importFrom stringr str_split
+#' @import dplyr
+#' @importFrom rlang .data
 mod_POS_Analytics_ui <- function(id){
   ns <- NS(id)
   #tagList(
@@ -59,27 +62,27 @@ mod_POS_Analytics_server <- function(id){
     ns <- session$ns
     
     #################IMPORT DATABASE##########################
-    sql_database <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+    sql_database <- load_db(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db")
     
-    all_sales_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+    all_sales_db_table <- open_db_table(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db",
                                         db_table = "All Sales")
     
     sql_table <- reactive({
       sql_table <- all_sales_db_table
       
       ds1 <- sql_table %>%
-        mutate(date_split = str_split(Timestamp, pattern = " ",simplify = TRUE)) %>%
+        dplyr::mutate(date_split = stringr::str_split(Timestamp, pattern = " ",simplify = TRUE)) %>%
         as.matrix() %>%
         as.data.frame() %>%
-        mutate(split = str_split(date_split.1,pattern = "-",simplify = TRUE)) %>%
-        mutate(date_split.1, Weekday = weekdays(ymd(date_split.1))) %>%
+        dplyr::mutate(split = stringr::str_split(date_split.1,pattern = "-",simplify = TRUE)) %>%
+        dplyr::mutate(date_split.1, Weekday = weekdays(lubridate::ymd(date_split.1))) %>%
         as.matrix() %>%
         as.data.frame()%>%
-        mutate(Month_Year = paste(split.2,split.1, sep = "-")) %>%
-        mutate(Txt_Month_Year = as.Date(as.yearmon(paste(split.1,split.2, sep = "-")))) %>%
-        mutate(split.2, Month = month.name[as.numeric(split.2)]) %>%
-        mutate(Total1 = as.numeric(Total)) %>%
-        mutate(QTY1 = as.numeric(QTY))
+        dplyr::mutate(Month_Year = paste(split.2,split.1, sep = "-")) %>%
+        dplyr::mutate(Txt_Month_Year = as.Date(zoo::as.yearmon(paste(split.1,split.2, sep = "-")))) %>%
+        dplyr::mutate(split.2, Month = month.name[as.numeric(split.2)]) %>%
+        dplyr::mutate(Total1 = as.numeric(Total)) %>%
+        dplyr::mutate(QTY1 = as.numeric(QTY))
       
       names(ds1) <- c("Timestamp","Worker","Product","QTY_char","Price","Total_char","Date", 
                       "Time","Year","Month_num","Day","Weekday","Month_Year",   

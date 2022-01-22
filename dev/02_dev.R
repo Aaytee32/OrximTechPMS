@@ -34,6 +34,7 @@ usethis::use_package("RSQLite")
 usethis::use_package("DBI")
 usethis::use_package("stats",type = "Suggests")
 usethis::use_package("utils",type = "Suggests")
+usethis::use_package("str_split")
 
 ## Add modules ----
 ## Create a module infrastructure in R/

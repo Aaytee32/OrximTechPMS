@@ -33,15 +33,16 @@ mod_POS_Inventory_ui <- function(id){
     
 #' POS_Inventory Server Functions
 #' @import shinyjs
+#' @importFrom rlang .data
 #' @noRd 
 mod_POS_Inventory_server <- function(id){
   moduleServer( id, function(input, output, session){
     ns <- session$ns
     
     #################IMPORT DATABASE##########################
-    sql_database <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+    sql_database <- load_db(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db")
     
-    pricelist_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+    pricelist_db_table <- open_db_table(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db",
                                        db_table = "PriceList")
     
     
@@ -209,9 +210,9 @@ mod_POS_Inventory_server <- function(id){
     })
     #################UPDATE DATABASE##########################
     observeEvent(input$inventory_old_add_quantity,{
-      sql_database <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+      sql_database <- load_db(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db")
       
-      pricelist_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+      pricelist_db_table <- open_db_table(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db",
                                           db_table = "PriceList")
       
       #sql_database <- reactive({
@@ -251,9 +252,9 @@ mod_POS_Inventory_server <- function(id){
     })
     #################UPDATE DATABASE##########################
     observeEvent(input$inventory_old_change_price,{
-      sql_database <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+      sql_database <- load_db(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db")
       
-      pricelist_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+      pricelist_db_table <- open_db_table(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db",
                                           db_table = "PriceList")
       
       output$inventory_updated_product_display <- renderDataTable({
@@ -279,7 +280,7 @@ mod_POS_Inventory_server <- function(id){
     observeEvent(input$inventory_new_add_product,{
       sql_database <- reactive({
         con <- dbConnect(RSQLite::SQLite(),
-                         dbname = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+                         dbname = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db")
       })
       
       sql_table <- reactive({

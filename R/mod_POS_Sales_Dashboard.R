@@ -7,6 +7,11 @@
 #' @noRd 
 #'
 #' @importFrom shiny NS tagList
+#' @importFrom stats aggregate
+#' @importFrom utils tail
+#' @importFrom utils head
+#' @importFrom stringr str_split
+#' @importFrom rlang .data
 mod_POS_Sales_Dashboard_ui <- function(id){
   ns <- NS(id)
   #tagList(
@@ -61,9 +66,9 @@ mod_POS_Sales_Dashboard_server <- function(id){
     ns <- session$ns
     
     #################IMPORT DATABASE##########################
-    sql_database <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+    sql_database <- load_db(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db")
 
-    all_sales_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+    all_sales_db_table <- open_db_table(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db",
                                db_table = "All Sales")
     
     

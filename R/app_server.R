@@ -10,6 +10,7 @@
 #' @import zoo
 #' @import lubridate
 #' @import dplyr
+#' @importFrom rlang .data
 #' @noRd
 app_server <- function( input, output, session ) {
   # Your application server logic
@@ -148,9 +149,9 @@ app_server <- function( input, output, session ) {
   
   ###########################IMPORT DATABASE##########################
   #sql_database <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
-  employee_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+  employee_db_table <- open_db_table(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db",
                                      db_table = "AuthenticationTable")
-  admin_db_table <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+  admin_db_table <- open_db_table(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db",
                                   db_table = "AdminTable")
   
   ##########################FOR EMPLOYEES ONLY#######################

@@ -7,6 +7,7 @@
 #' @noRd 
 #'
 #' @importFrom shiny NS tagList
+#' @importFrom rlang .data
 mod_POS_Point_of_Sale_ui <- function(id){
   ns <- NS(id)
   #tagList(
@@ -83,9 +84,9 @@ mod_POS_Point_of_Sale_server <- function(id){
     extracted_sql_table$DB <- NULL
     
     observeEvent(input$employee_name,{
-      imported_database$DB <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
+      imported_database$DB <- load_db(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db")
       
-      extracted_sql_table$DB <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+      extracted_sql_table$DB <- open_db_table(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db",
                                           db_table = "PriceList")
     })
     
@@ -220,7 +221,7 @@ mod_POS_Point_of_Sale_server <- function(id){
         
         #imported_database$DB <- load_db(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db")
         
-        extracted_sql_table$DB <- open_db_table(db_name = "inst/app/www/pharma_database/Pharmacy_Database_Manager.db",
+        extracted_sql_table$DB <- open_db_table(db_name = "C:/Users/Public/Documents/pharma_database/Pharmacy_Database_Manager.db",
                                    db_table = "PriceList")
 
       }
